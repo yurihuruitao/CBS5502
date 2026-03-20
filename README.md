@@ -27,9 +27,11 @@ CBS5502/
 ├── README.md                          # 本文档（项目概述）
 ├── RESULTS.md                         # 模型训练与分类结果
 ├── ANALYSIS.md                        # 语言学分析与向量分析
+├── requirements.txt                   # Python 依赖
 ├── data/
+│   ├── glove.6B.100d.txt              # GloVe 词向量（Google Drive）
 │   ├── raw/
-│   │   └── wic_dataset.jsonl          # 原始 WIC 数据集（SemCor 转换而来）
+│   │   └── wic_dataset.jsonl          # 原始 WIC 数据集（Google Drive）
 │   └── split/
 │       ├── train.jsonl                # 训练集
 │       ├── dev.jsonl                  # 验证集
@@ -44,7 +46,7 @@ CBS5502/
 │   ├── model_sbert.py                 # Sentence-BERT 余弦相似度模型
 │   ├── evaluate.py                    # 统一评估 + 语言学分析 + 错误分析
 │   └── analyze_bert_embeddings.py     # BERT 上下文向量分析与可视化
-├── models/                            # 训练好的模型权重
+├── models/                            # 训练好的模型权重（Google Drive）
 │   ├── bert.pt
 │   ├── bert_frozen_mlp.pt
 │   ├── bilstm.pt
@@ -62,10 +64,9 @@ CBS5502/
 │   ├── metrics.json
 │   ├── linguistic_analysis.json
 │   └── error_analysis.json
-├── scripts/                           # 数据构建脚本
-│   ├── semcor_to_wic.py               # SemCor → WIC 转换
-│   └── data_prepare.py                # 数据准备
-└── nltk_data/                         # NLTK 资源（SemCor 语料库）
+└── scripts/                           # 数据构建脚本
+    ├── semcor_to_wic.py               # SemCor → WIC 转换
+    └── data_prepare.py                # 数据准备
 ```
 
 ---
@@ -155,17 +156,65 @@ CBS5502/
 
 ---
 
-## 5. 使用方法
+## 5. 快速开始
+
+### 5.1 环境配置
+
+```bash
+# 克隆仓库
+git clone https://github.com/yurihuruitao/CBS5502.git
+cd CBS5502
+
+# 安装依赖（需要 Python 3.8+，建议 CUDA 环境）
+pip install -r requirements.txt
+```
+
+### 5.2 下载大文件
+
+模型权重和语料库文件存储在 Google Drive，需手动下载或使用 gdown：
+
+| 文件 | 放置路径 | Google Drive |
+|------|---------|--------------|
+| 模型权重（`*.pt`） | `models/` | [下载](https://drive.google.com/open?id=1CkFDaNVM5LDHtWulIc588xBvtSTpjGjM) |
+| 语料库（GloVe + 原始数据集） | `data/` | [下载](https://drive.google.com/open?id=17Wzb4FGMvM5Gr9od9b0u7mJA0wjbY7wH) |
+
+下载后将文件放到对应位置：
+
+```
+models/
+├── bert.pt
+├── bert_frozen_mlp.pt
+├── bilstm.pt
+└── roberta.pt
+
+data/
+├── glove.6B.100d.txt
+└── raw/
+    └── wic_dataset.jsonl
+```
+
+或使用 gdown 批量下载：
+
+```bash
+# 下载模型权重
+gdown --folder "https://drive.google.com/open?id=1CkFDaNVM5LDHtWulIc588xBvtSTpjGjM" -O models/
+
+# 下载语料库
+gdown --folder "https://drive.google.com/open?id=17Wzb4FGMvM5Gr9od9b0u7mJA0wjbY7wH" -O data/raw/
+mv data/raw/glove.6B.100d.txt data/
+```
+
+### 5.3 运行
 
 所有脚本从 `src/` 目录运行：
 
 ```bash
 cd src/
 
-# 1. 数据清洗与划分
+# 1. 数据清洗与划分（生成 data/split/）
 python data_clean.py
 
-# 2. 训练模型
+# 2. 训练模型（需要 GPU）
 python model_bilstm.py
 python model_bert.py
 python model_bert_frozen.py
@@ -182,15 +231,7 @@ python analyze_bert_embeddings.py
 python eval_official_wic.py
 ```
 
-### 环境依赖
-
-- Python 3.8+
-- PyTorch 2.0+（CUDA 支持）
-- transformers
-- scikit-learn
-- matplotlib
-- scipy（统计检验）
-- nltk（SemCor 语料库）
+> **注意：** 如果只想运行评估（跳过训练），只需下载模型权重，然后直接执行步骤 3-5。
 
 ---
 
