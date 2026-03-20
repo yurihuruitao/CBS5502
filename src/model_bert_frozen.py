@@ -120,10 +120,7 @@ if __name__ == "__main__":
     model = MLP(hidden_size).to(DEVICE)
     optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 
-    # 加权损失
-    n_pos, n_neg = train_y.sum().item(), (train_y == 0).sum().item()
-    weight = torch.FloatTensor([1.0, n_neg / max(n_pos, 1)]).to(DEVICE)
-    criterion = nn.CrossEntropyLoss(weight=weight)
+    criterion = nn.CrossEntropyLoss()
 
     print(f"\nMLP 参数量: {sum(p.numel() for p in model.parameters()):,}")
     print(f"训练 MLP (input_dim={hidden_size}, epochs={EPOCHS}, lr={LR})\n")

@@ -144,11 +144,7 @@ if __name__ == "__main__":
     warmup_steps = int(total_steps * WARMUP_RATIO)
     scheduler = get_linear_schedule_with_warmup(optimizer, warmup_steps, total_steps)
 
-    # 加权损失
-    labels_all = [int(s["label"]) for s in train_ds.samples]
-    n_pos, n_neg = sum(labels_all), len(labels_all) - sum(labels_all)
-    weight = torch.FloatTensor([1.0, n_neg / max(n_pos, 1)]).to(DEVICE)
-    criterion = nn.CrossEntropyLoss(weight=weight)
+    criterion = nn.CrossEntropyLoss()
 
     scaler = torch.amp.GradScaler("cuda", enabled=USE_AMP)
 

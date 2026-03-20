@@ -1,72 +1,72 @@
 {
   "BiLSTM": {
     "test": {
-      "accuracy": 0.5307142857142857,
-      "precision_macro": 0.5346909280341885,
-      "recall_macro": 0.5307142857142857,
-      "f1_macro": 0.5168688817442304
+      "accuracy": 0.5257142857142857,
+      "precision_macro": 0.5294736842105263,
+      "recall_macro": 0.5257142857142857,
+      "f1_macro": 0.5100922266139657
     },
     "dev": {
-      "accuracy": 0.5360501567398119,
-      "precision_macro": 0.5411188450631605,
-      "recall_macro": 0.5360501567398119,
-      "f1_macro": 0.521297845373891
+      "accuracy": 0.5062695924764891,
+      "precision_macro": 0.5075887334665525,
+      "recall_macro": 0.5062695924764891,
+      "f1_macro": 0.4838386562391648
     }
   },
   "BERT-Frozen+MLP": {
     "test": {
-      "accuracy": 0.6114285714285714,
-      "precision_macro": 0.6224489795918368,
-      "recall_macro": 0.6114285714285714,
-      "f1_macro": 0.6024844720496894
+      "accuracy": 0.6185714285714285,
+      "precision_macro": 0.6365503755722894,
+      "recall_macro": 0.6185714285714285,
+      "f1_macro": 0.6055888627917725
     },
     "dev": {
-      "accuracy": 0.6379310344827587,
-      "precision_macro": 0.6546905307705873,
-      "recall_macro": 0.6379310344827587,
-      "f1_macro": 0.6278511889581055
+      "accuracy": 0.6410658307210031,
+      "precision_macro": 0.6621374356194091,
+      "recall_macro": 0.6410658307210031,
+      "f1_macro": 0.6290123127629699
     }
   },
   "BERT": {
     "test": {
-      "accuracy": 0.6664285714285715,
-      "precision_macro": 0.6837642949692975,
-      "recall_macro": 0.6664285714285714,
-      "f1_macro": 0.658371543154237
+      "accuracy": 0.6592857142857143,
+      "precision_macro": 0.6873684159986941,
+      "recall_macro": 0.6592857142857143,
+      "f1_macro": 0.646022202327094
     },
     "dev": {
-      "accuracy": 0.6692789968652038,
-      "precision_macro": 0.6925983899821109,
-      "recall_macro": 0.6692789968652038,
-      "f1_macro": 0.6589557740491433
+      "accuracy": 0.6442006269592476,
+      "precision_macro": 0.674540869730707,
+      "recall_macro": 0.6442006269592476,
+      "f1_macro": 0.6280361110040966
     }
   },
   "RoBERTa": {
     "test": {
-      "accuracy": 0.655,
-      "precision_macro": 0.6636574807306515,
-      "recall_macro": 0.655,
-      "f1_macro": 0.6503762255833396
+      "accuracy": 0.65,
+      "precision_macro": 0.668870794313075,
+      "recall_macro": 0.65,
+      "f1_macro": 0.6399411308997693
     },
     "dev": {
-      "accuracy": 0.6661442006269592,
-      "precision_macro": 0.6788419226538038,
-      "recall_macro": 0.6661442006269592,
-      "f1_macro": 0.660111200318144
+      "accuracy": 0.6175548589341693,
+      "precision_macro": 0.6427420798281726,
+      "recall_macro": 0.6175548589341693,
+      "f1_macro": 0.5999054198536065
     }
   },
   "SentenceBERT": {
     "test": {
-      "accuracy": 0.5228571428571429,
-      "precision_macro": 0.522974358974359,
-      "recall_macro": 0.5228571428571429,
-      "f1_macro": 0.5222477650063857
+      "accuracy": 0.5192857142857142,
+      "precision_macro": 0.5195345202879946,
+      "recall_macro": 0.5192857142857144,
+      "f1_macro": 0.5177501421618531
     },
     "dev": {
-      "accuracy": 0.5846394984326019,
-      "precision_macro": 0.5846403301886792,
-      "recall_macro": 0.5846394984326019,
-      "f1_macro": 0.584638477998639
+      "accuracy": 0.5768025078369906,
+      "precision_macro": 0.5768780554981754,
+      "recall_macro": 0.5768025078369906,
+      "f1_macro": 0.5766985138004246
     }
   }
 }

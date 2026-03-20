@@ -81,6 +81,20 @@ def clean(samples):
     return cleaned
 
 
+def balance_split(data, rng):
+    """对单个 split 做下采样，使正负例数量一致。"""
+    pos = [s for s in data if s["label"]]
+    neg = [s for s in data if not s["label"]]
+    n_min = min(len(pos), len(neg))
+    if len(pos) > n_min:
+        pos = rng.sample(pos, n_min)
+    if len(neg) > n_min:
+        neg = rng.sample(neg, n_min)
+    balanced = pos + neg
+    rng.shuffle(balanced)
+    return balanced
+
+
 def split_by_lemma(samples, train_ratio=0.7, dev_ratio=0.15, seed=42):
     """按 lemma 划分，同一 lemma 只出现在一个集合。"""
     rng = random.Random(seed)
@@ -107,9 +121,11 @@ def split_by_lemma(samples, train_ratio=0.7, dev_ratio=0.15, seed=42):
             test.extend(group)
         count += len(group)
 
-    rng.shuffle(train)
-    rng.shuffle(dev)
-    rng.shuffle(test)
+    # 下采样使正负例平衡
+    train = balance_split(train, rng)
+    dev = balance_split(dev, rng)
+    test = balance_split(test, rng)
+
     return train, dev, test
 
 

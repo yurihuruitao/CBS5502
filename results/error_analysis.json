@@ -1,740 +1,740 @@
 {
   "Majority": {
     "total_errors": 2907,
-    "error_rate": 0.3888443017656501,
+    "error_rate": 0.5,
     "top_confused_pairs": [
       [
         [
-          "field.n.06",
-          "field.n.06"
+          "construct.v.03",
+          "construct.v.03"
         ],
         1
       ],
       [
         [
-          "arise.v.02",
-          "arise.v.02"
+          "mining.n.01",
+          "mining.n.01"
         ],
         1
       ],
       [
         [
-          "concern.n.02",
-          "concern.n.02"
+          "male.a.01",
+          "male.a.01"
         ],
         1
       ],
       [
         [
-          "set_up.s.00",
-          "set_up.s.00"
+          "insidiously.r.01",
+          "insidiously.r.01"
         ],
         1
       ],
       [
         [
-          "rig.n.01",
-          "rig.n.01"
+          "improved.a.01",
+          "improved.a.01"
         ],
         1
       ],
       [
         [
-          "airspeed.n.01",
-          "airspeed.n.01"
+          "plainly.r.01",
+          "plainly.r.01"
         ],
         1
       ],
       [
         [
-          "lump.n.01",
-          "lump.n.01"
+          "instantly.r.01",
+          "instantly.r.01"
         ],
         1
       ],
       [
         [
-          "television.n.01",
-          "television.n.01"
+          "stick_to.v.01",
+          "stick_to.v.01"
         ],
         1
       ],
       [
         [
-          "taxi.v.01",
-          "taxi.v.01"
+          "eye.n.01",
+          "eye.n.01"
         ],
         1
       ],
       [
         [
-          "reading.n.01",
-          "reading.n.01"
+          "abrupt.s.02",
+          "abrupt.s.02"
         ],
         1
       ]
     ],
     "sample_errors": [
       {
-        "index": 1,
-        "word": "field",
-        "pos": "noun",
-        "sense1": "field.n.06",
-        "sense2": "field.n.06",
-        "true_label": 1,
-        "pred_label": 0,
-        "sentence1_preview": "If private brand competition has n't been felt in your product field as yet , ha",
-        "sentence2_preview": "Your competition is now proportionately greater - you are competing not only aga"
-      },
-      {
-        "index": 2,
-        "word": "arise",
+        "index": 4,
+        "word": "construct",
         "pos": "verb",
-        "sense1": "arise.v.02",
-        "sense2": "arise.v.02",
+        "sense1": "construct.v.03",
+        "sense2": "construct.v.03",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
-        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+        "sentence1_preview": "On C , from the point P at **f to the point Q at **f , we construct the chord , ",
+        "sentence2_preview": "In the C-plane we construct a set of rectangular Cartesian coordinates u , v wit"
       },
       {
-        "index": 12,
-        "word": "concern",
+        "index": 5,
+        "word": "mining",
         "pos": "noun",
-        "sense1": "concern.n.02",
-        "sense2": "concern.n.02",
+        "sense1": "mining.n.01",
+        "sense2": "mining.n.01",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "His religious beliefs provide him with plausible explanations for many condition",
-        "sentence2_preview": "The conversation of the characters creates an atmosphere suggesting the usual mi"
+        "sentence1_preview": "At any cost , he must leave the dreary Pennsylvania mining town where his father",
+        "sentence2_preview": "Be it enacted by the Senate and House of Representatives of the United States of"
+      },
+      {
+        "index": 7,
+        "word": "male",
+        "pos": "adj",
+        "sense1": "male.a.01",
+        "sense2": "male.a.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "On Mars humans were building pressure domes for the male and female party that w",
+        "sentence2_preview": "After the male and female andrenas have mated , the cycle is repeated ."
+      },
+      {
+        "index": 9,
+        "word": "insidiously",
+        "pos": "adv",
+        "sense1": "insidiously.r.01",
+        "sense2": "insidiously.r.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "Communist political warfare , we must remember , is waged insidiously and in del",
+        "sentence2_preview": "And the rebellion of these third generation Jews is not the traditional conflict"
       },
       {
         "index": 13,
-        "word": "set up",
+        "word": "improved",
         "pos": "adj",
-        "sense1": "set_up.s.00",
-        "sense2": "set_up.s.00",
+        "sense1": "improved.a.01",
+        "sense2": "improved.a.01",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "Above all , do n't set up extravagant fringe benefits just to buy employee good ",
-        "sentence2_preview": "`` Those are the things I can do , now that I 'm set up '' ."
-      },
-      {
-        "index": 15,
-        "word": "rig",
-        "pos": "noun",
-        "sense1": "rig.n.01",
-        "sense2": "rig.n.01",
-        "true_label": 1,
-        "pred_label": 0,
-        "sentence1_preview": "If an expensive and specialized piece of machinery is needed - such as a spray r",
-        "sentence2_preview": "Men crowded the streets and freight rigs and teams were moving about ."
+        "sentence1_preview": "The rangy , Albany ( Cal. ) native , a surprise slugging sensation for the Flock",
+        "sentence2_preview": "`` Is his appetite improved '' ?"
       }
     ]
   },
   "Random": {
-    "total_errors": 3570,
-    "error_rate": 0.47752808988764045,
+    "total_errors": 2996,
+    "error_rate": 0.5153078775369797,
     "top_confused_pairs": [
       [
         [
-          "field.n.06",
-          "field.n.06"
+          "low.a.01",
+          "low.a.05"
         ],
         1
       ],
       [
         [
-          "arise.v.02",
-          "arise.v.02"
+          "relief.n.00",
+          "relief.n.05"
         ],
         1
       ],
       [
         [
-          "flash.v.04",
-          "flash.v.06"
+          "male.a.01",
+          "male.a.01"
         ],
         1
       ],
       [
         [
-          "faded.s.01",
-          "faded.s.02"
+          "insidiously.r.01",
+          "insidiously.r.01"
         ],
         1
       ],
       [
         [
-          "see.v.18",
-          "see.v.5;2"
+          "better.r.01",
+          "better.r.02"
         ],
         1
       ],
       [
         [
-          "ignite.v.01",
-          "ignite.v.03"
+          "melody.n.01",
+          "melody.n.02"
         ],
         1
       ],
       [
         [
-          "concern.n.02",
-          "concern.n.02"
+          "fit.v.03",
+          "fit.v.04"
         ],
         1
       ],
       [
         [
-          "see.v.12",
-          "see.v.16"
+          "instantly.r.01",
+          "instantly.r.01"
         ],
         1
       ],
       [
         [
-          "implication.n.01",
-          "implication.n.03"
+          "abrupt.s.02",
+          "abrupt.s.02"
         ],
         1
       ],
       [
         [
-          "division.n.02",
-          "division.n.05"
+          "see.v.08",
+          "see.v.15;8"
         ],
         1
       ]
     ],
     "sample_errors": [
       {
-        "index": 1,
-        "word": "field",
-        "pos": "noun",
-        "sense1": "field.n.06",
-        "sense2": "field.n.06",
-        "true_label": 1,
-        "pred_label": 0,
-        "sentence1_preview": "If private brand competition has n't been felt in your product field as yet , ha",
-        "sentence2_preview": "Your competition is now proportionately greater - you are competing not only aga"
-      },
-      {
-        "index": 2,
-        "word": "arise",
-        "pos": "verb",
-        "sense1": "arise.v.02",
-        "sense2": "arise.v.02",
-        "true_label": 1,
-        "pred_label": 0,
-        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
-        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
-      },
-      {
-        "index": 4,
-        "word": "flash",
-        "pos": "verb",
-        "sense1": "flash.v.04",
-        "sense2": "flash.v.06",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "`` The pattern '' , says Dr. Morton Schillinger , psychologist at New York 's Li",
-        "sentence2_preview": "Her voice was ripe and full and her teeth flashed again in Sicilian brilliance b"
-      },
-      {
-        "index": 5,
-        "word": "faded",
+        "index": 0,
+        "word": "low",
         "pos": "adj",
-        "sense1": "faded.s.01",
-        "sense2": "faded.s.02",
+        "sense1": "low.a.01",
+        "sense2": "low.a.05",
         "true_label": 0,
         "pred_label": 1,
-        "sentence1_preview": "`` They were all faded .",
-        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
+        "sentence1_preview": "Needless to say , the organic load was very low on a volumetric basis , but was ",
+        "sentence2_preview": "It began invariably in low tones , almost conversational , and then gradually wo"
       },
       {
         "index": 6,
-        "word": "see",
-        "pos": "verb",
-        "sense1": "see.v.18",
-        "sense2": "see.v.5;2",
+        "word": "relief",
+        "pos": "noun",
+        "sense1": "relief.n.00",
+        "sense2": "relief.n.05",
         "true_label": 0,
         "pred_label": 1,
-        "sentence1_preview": "`` Well , let 's see .",
-        "sentence2_preview": "We can see others more clearly than we can see ourselves , and others can see us"
+        "sentence1_preview": "In the Analytical phase of their Cubism , Braque and Picasso had not only had to",
+        "sentence2_preview": "Where this approach becomes critical , the industry can be expected to put much "
+      },
+      {
+        "index": 7,
+        "word": "male",
+        "pos": "adj",
+        "sense1": "male.a.01",
+        "sense2": "male.a.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "On Mars humans were building pressure domes for the male and female party that w",
+        "sentence2_preview": "After the male and female andrenas have mated , the cycle is repeated ."
+      },
+      {
+        "index": 9,
+        "word": "insidiously",
+        "pos": "adv",
+        "sense1": "insidiously.r.01",
+        "sense2": "insidiously.r.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "Communist political warfare , we must remember , is waged insidiously and in del",
+        "sentence2_preview": "And the rebellion of these third generation Jews is not the traditional conflict"
+      },
+      {
+        "index": 10,
+        "word": "better",
+        "pos": "adv",
+        "sense1": "better.r.01",
+        "sense2": "better.r.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Few writers have better understood their deepest selves .",
+        "sentence2_preview": "`` Sir , Vaughn knows better than to leave the station without a relief ."
       }
     ]
   },
   "BiLSTM": {
-    "total_errors": 2784,
-    "error_rate": 0.3723916532905297,
+    "total_errors": 2040,
+    "error_rate": 0.3508771929824561,
     "top_confused_pairs": [
       [
         [
-          "field.n.06",
-          "field.n.06"
+          "low.a.01",
+          "low.a.05"
         ],
         1
       ],
       [
         [
-          "stimulate.v.02",
-          "stimulate.v.06"
+          "active.a.06",
+          "active.s.04"
         ],
         1
       ],
       [
         [
-          "flash.v.04",
-          "flash.v.06"
+          "melody.n.01",
+          "melody.n.02"
         ],
         1
       ],
       [
         [
-          "faded.s.01",
-          "faded.s.02"
+          "fit.v.03",
+          "fit.v.04"
         ],
         1
       ],
       [
         [
-          "fog.n.01",
-          "fog.n.2;1"
+          "stick_to.v.01",
+          "stick_to.v.01"
         ],
         1
       ],
       [
         [
-          "ignite.v.01",
-          "ignite.v.03"
+          "eye.n.01",
+          "eye.n.01"
         ],
         1
       ],
       [
         [
-          "resonance.n.01",
-          "resonance.n.02"
+          "lean.v.01",
+          "lean.v.04"
         ],
         1
       ],
       [
         [
-          "set_up.s.00",
-          "set_up.s.00"
+          "go_forward.v.01",
+          "go_forward.v.01"
         ],
         1
       ],
       [
         [
-          "implication.n.01",
-          "implication.n.03"
+          "trade.n.02",
+          "trade.n.4;1"
         ],
         1
       ],
       [
         [
-          "infect.v.00",
-          "infect.v.02"
+          "refute.v.01",
+          "refute.v.02"
         ],
         1
       ]
     ],
     "sample_errors": [
       {
-        "index": 1,
-        "word": "field",
+        "index": 0,
+        "word": "low",
+        "pos": "adj",
+        "sense1": "low.a.01",
+        "sense2": "low.a.05",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Needless to say , the organic load was very low on a volumetric basis , but was ",
+        "sentence2_preview": "It began invariably in low tones , almost conversational , and then gradually wo"
+      },
+      {
+        "index": 8,
+        "word": "active",
+        "pos": "adj",
+        "sense1": "active.a.06",
+        "sense2": "active.s.04",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "It appeared that most of the mixed liquor suspended solids were active microbial",
+        "sentence2_preview": "Oersted returned in 1814 and resumed an active part in university and political "
+      },
+      {
+        "index": 14,
+        "word": "melody",
         "pos": "noun",
-        "sense1": "field.n.06",
-        "sense2": "field.n.06",
+        "sense1": "melody.n.01",
+        "sense2": "melody.n.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "The lyric beauties of Schubert 's Trout Quintet - its elemental rhythms and infe",
+        "sentence2_preview": "In all his miscalculations , Stravinsky made the fatal historical blunder of pre"
+      },
+      {
+        "index": 15,
+        "word": "fit",
+        "pos": "verb",
+        "sense1": "fit.v.03",
+        "sense2": "fit.v.04",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Use wooden design head of mold for pattern C ; pattern D for lid fits over top d",
+        "sentence2_preview": "Some time in 1912 , Picasso cut out and folded a piece of paper in the shape of "
+      },
+      {
+        "index": 18,
+        "word": "stick to",
+        "pos": "verb",
+        "sense1": "stick_to.v.01",
+        "sense2": "stick_to.v.01",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "If private brand competition has n't been felt in your product field as yet , ha",
-        "sentence2_preview": "Your competition is now proportionately greater - you are competing not only aga"
-      },
-      {
-        "index": 3,
-        "word": "stimulate",
-        "pos": "verb",
-        "sense1": "stimulate.v.02",
-        "sense2": "stimulate.v.06",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "At 12 , Hans was sufficiently mature to help his father in the apothecary shop ,",
-        "sentence2_preview": "The overall effect was probably to stimulate more party activity in the communal"
-      },
-      {
-        "index": 4,
-        "word": "flash",
-        "pos": "verb",
-        "sense1": "flash.v.04",
-        "sense2": "flash.v.06",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "`` The pattern '' , says Dr. Morton Schillinger , psychologist at New York 's Li",
-        "sentence2_preview": "Her voice was ripe and full and her teeth flashed again in Sicilian brilliance b"
-      },
-      {
-        "index": 5,
-        "word": "faded",
-        "pos": "adj",
-        "sense1": "faded.s.01",
-        "sense2": "faded.s.02",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "`` They were all faded .",
-        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
-      },
-      {
-        "index": 7,
-        "word": "fog",
-        "pos": "noun",
-        "sense1": "fog.n.01",
-        "sense2": "fog.n.2;1",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "I dig it , rake it smooth , sow the seeds and wet them down with a fog spray .",
-        "sentence2_preview": "Poor winds and fog locked her up in a harbor the crew called `` Lousie Bay '' ."
+        "sentence1_preview": "Water from the snow and water from the towels had run off the kid to the table w",
+        "sentence2_preview": "Likewise , a charged particle will tend to stick to an uncharged surface and vic"
       }
     ]
   },
   "BERT-Frozen+MLP": {
-    "total_errors": 1950,
-    "error_rate": 0.2608346709470305,
+    "total_errors": 1620,
+    "error_rate": 0.2786377708978328,
     "top_confused_pairs": [
       [
         [
-          "arise.v.02",
-          "arise.v.02"
+          "mining.n.01",
+          "mining.n.01"
         ],
         1
       ],
       [
         [
-          "stimulate.v.02",
-          "stimulate.v.06"
+          "melody.n.01",
+          "melody.n.02"
         ],
         1
       ],
       [
         [
-          "fog.n.01",
-          "fog.n.2;1"
+          "stick_to.v.01",
+          "stick_to.v.01"
         ],
         1
       ],
       [
         [
-          "resonance.n.01",
-          "resonance.n.02"
+          "go_forward.v.01",
+          "go_forward.v.01"
         ],
         1
       ],
       [
         [
-          "set_up.s.00",
-          "set_up.s.00"
+          "trade.n.02",
+          "trade.n.4;1"
         ],
         1
       ],
       [
         [
-          "pleasant.a.01",
-          "pleasant.s.02"
+          "refute.v.01",
+          "refute.v.02"
         ],
         1
       ],
       [
         [
-          "reach.n.03",
-          "reach.n.04"
+          "open_up.v.01",
+          "open_up.v.02"
         ],
         1
       ],
       [
         [
-          "television.n.01",
-          "television.n.01"
+          "material.a.02",
+          "material.a.02"
         ],
         1
       ],
       [
         [
-          "will.v.01",
-          "will.v.02"
+          "marry.v.02",
+          "marry.v.02"
         ],
         1
       ],
       [
         [
-          "rest.v.03",
-          "rest.v.03"
+          "affirm.v.02",
+          "affirm.v.02"
         ],
         1
       ]
     ],
     "sample_errors": [
       {
-        "index": 2,
-        "word": "arise",
-        "pos": "verb",
-        "sense1": "arise.v.02",
-        "sense2": "arise.v.02",
+        "index": 5,
+        "word": "mining",
+        "pos": "noun",
+        "sense1": "mining.n.01",
+        "sense2": "mining.n.01",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
-        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+        "sentence1_preview": "At any cost , he must leave the dreary Pennsylvania mining town where his father",
+        "sentence2_preview": "Be it enacted by the Senate and House of Representatives of the United States of"
       },
       {
-        "index": 3,
-        "word": "stimulate",
+        "index": 14,
+        "word": "melody",
+        "pos": "noun",
+        "sense1": "melody.n.01",
+        "sense2": "melody.n.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "The lyric beauties of Schubert 's Trout Quintet - its elemental rhythms and infe",
+        "sentence2_preview": "In all his miscalculations , Stravinsky made the fatal historical blunder of pre"
+      },
+      {
+        "index": 18,
+        "word": "stick to",
         "pos": "verb",
-        "sense1": "stimulate.v.02",
-        "sense2": "stimulate.v.06",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "At 12 , Hans was sufficiently mature to help his father in the apothecary shop ,",
-        "sentence2_preview": "The overall effect was probably to stimulate more party activity in the communal"
-      },
-      {
-        "index": 7,
-        "word": "fog",
-        "pos": "noun",
-        "sense1": "fog.n.01",
-        "sense2": "fog.n.2;1",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "I dig it , rake it smooth , sow the seeds and wet them down with a fog spray .",
-        "sentence2_preview": "Poor winds and fog locked her up in a harbor the crew called `` Lousie Bay '' ."
-      },
-      {
-        "index": 11,
-        "word": "resonance",
-        "pos": "noun",
-        "sense1": "resonance.n.01",
-        "sense2": "resonance.n.02",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "The data reported here are either from spectra from which the adsorbed water res",
-        "sentence2_preview": "The timbre remains that of the instruments unclouded by resonance ."
-      },
-      {
-        "index": 13,
-        "word": "set up",
-        "pos": "adj",
-        "sense1": "set_up.s.00",
-        "sense2": "set_up.s.00",
+        "sense1": "stick_to.v.01",
+        "sense2": "stick_to.v.01",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "Above all , do n't set up extravagant fringe benefits just to buy employee good ",
-        "sentence2_preview": "`` Those are the things I can do , now that I 'm set up '' ."
+        "sentence1_preview": "Water from the snow and water from the towels had run off the kid to the table w",
+        "sentence2_preview": "Likewise , a charged particle will tend to stick to an uncharged surface and vic"
+      },
+      {
+        "index": 31,
+        "word": "go forward",
+        "pos": "verb",
+        "sense1": "go_forward.v.01",
+        "sense2": "go_forward.v.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "Capital imports drawn from a number of sources must be employed and combined ski",
+        "sentence2_preview": "The old man beckoned with one finger and Clayton went forward to him ."
+      },
+      {
+        "index": 32,
+        "word": "trade",
+        "pos": "noun",
+        "sense1": "trade.n.02",
+        "sense2": "trade.n.4;1",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Dice rolled , prostitutes plied their trade , thieves stole , murderers stabbed ",
+        "sentence2_preview": "The latter provisions proscribe any contract , combination , or conspiracy in re"
       }
     ]
   },
   "BERT": {
-    "total_errors": 1860,
-    "error_rate": 0.24879614767255218,
+    "total_errors": 1464,
+    "error_rate": 0.2518059855521156,
     "top_confused_pairs": [
       [
         [
-          "arise.v.02",
-          "arise.v.02"
+          "melody.n.01",
+          "melody.n.02"
         ],
         1
       ],
       [
         [
-          "stimulate.v.02",
-          "stimulate.v.06"
+          "stick_to.v.01",
+          "stick_to.v.01"
         ],
         1
       ],
       [
         [
-          "faded.s.01",
-          "faded.s.02"
+          "analogy.n.02",
+          "analogy.n.02"
         ],
         1
       ],
       [
         [
-          "fog.n.01",
-          "fog.n.2;1"
+          "go_forward.v.01",
+          "go_forward.v.01"
         ],
         1
       ],
       [
         [
-          "concern.n.02",
-          "concern.n.02"
+          "trade.n.02",
+          "trade.n.4;1"
         ],
         1
       ],
       [
         [
-          "set_up.s.00",
-          "set_up.s.00"
+          "refute.v.01",
+          "refute.v.02"
         ],
         1
       ],
       [
         [
-          "rig.n.01",
-          "rig.n.01"
+          "freeze.v.01",
+          "freeze.v.02"
         ],
         1
       ],
       [
         [
-          "implication.n.01",
-          "implication.n.03"
+          "open_up.v.01",
+          "open_up.v.02"
         ],
         1
       ],
       [
         [
-          "infect.v.00",
-          "infect.v.02"
+          "material.a.02",
+          "material.a.02"
         ],
         1
       ],
       [
         [
-          "active.a.03",
-          "active.s.08"
+          "affirm.v.02",
+          "affirm.v.02"
         ],
         1
       ]
     ],
     "sample_errors": [
       {
-        "index": 2,
-        "word": "arise",
+        "index": 14,
+        "word": "melody",
+        "pos": "noun",
+        "sense1": "melody.n.01",
+        "sense2": "melody.n.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "The lyric beauties of Schubert 's Trout Quintet - its elemental rhythms and infe",
+        "sentence2_preview": "In all his miscalculations , Stravinsky made the fatal historical blunder of pre"
+      },
+      {
+        "index": 18,
+        "word": "stick to",
         "pos": "verb",
-        "sense1": "arise.v.02",
-        "sense2": "arise.v.02",
+        "sense1": "stick_to.v.01",
+        "sense2": "stick_to.v.01",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
-        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+        "sentence1_preview": "Water from the snow and water from the towels had run off the kid to the table w",
+        "sentence2_preview": "Likewise , a charged particle will tend to stick to an uncharged surface and vic"
       },
       {
-        "index": 3,
-        "word": "stimulate",
-        "pos": "verb",
-        "sense1": "stimulate.v.02",
-        "sense2": "stimulate.v.06",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "At 12 , Hans was sufficiently mature to help his father in the apothecary shop ,",
-        "sentence2_preview": "The overall effect was probably to stimulate more party activity in the communal"
-      },
-      {
-        "index": 5,
-        "word": "faded",
-        "pos": "adj",
-        "sense1": "faded.s.01",
-        "sense2": "faded.s.02",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "`` They were all faded .",
-        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
-      },
-      {
-        "index": 7,
-        "word": "fog",
+        "index": 27,
+        "word": "analogy",
         "pos": "noun",
-        "sense1": "fog.n.01",
-        "sense2": "fog.n.2;1",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "I dig it , rake it smooth , sow the seeds and wet them down with a fog spray .",
-        "sentence2_preview": "Poor winds and fog locked her up in a harbor the crew called `` Lousie Bay '' ."
-      },
-      {
-        "index": 12,
-        "word": "concern",
-        "pos": "noun",
-        "sense1": "concern.n.02",
-        "sense2": "concern.n.02",
+        "sense1": "analogy.n.02",
+        "sense2": "analogy.n.02",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "His religious beliefs provide him with plausible explanations for many condition",
-        "sentence2_preview": "The conversation of the characters creates an atmosphere suggesting the usual mi"
+        "sentence1_preview": "This hypothesis is evolved in analogy to the demonstrated action of organic acti",
+        "sentence2_preview": "One could also add to these analogies that steel loses its magnetism by heat , w"
+      },
+      {
+        "index": 31,
+        "word": "go forward",
+        "pos": "verb",
+        "sense1": "go_forward.v.01",
+        "sense2": "go_forward.v.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "Capital imports drawn from a number of sources must be employed and combined ski",
+        "sentence2_preview": "The old man beckoned with one finger and Clayton went forward to him ."
+      },
+      {
+        "index": 32,
+        "word": "trade",
+        "pos": "noun",
+        "sense1": "trade.n.02",
+        "sense2": "trade.n.4;1",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Dice rolled , prostitutes plied their trade , thieves stole , murderers stabbed ",
+        "sentence2_preview": "The latter provisions proscribe any contract , combination , or conspiracy in re"
       }
     ]
   },
   "RoBERTa": {
-    "total_errors": 1969,
-    "error_rate": 0.2633761369716426,
+    "total_errors": 1472,
+    "error_rate": 0.25318197454420366,
     "top_confused_pairs": [
       [
         [
-          "arise.v.02",
-          "arise.v.02"
+          "divide.v.03",
+          "divide.v.04"
         ],
         1
       ],
       [
         [
-          "stimulate.v.02",
-          "stimulate.v.06"
+          "control.v.01",
+          "control.v.04"
         ],
         1
       ],
       [
         [
-          "faded.s.01",
-          "faded.s.02"
+          "melody.n.01",
+          "melody.n.02"
         ],
         1
       ],
       [
         [
-          "fog.n.01",
-          "fog.n.2;1"
+          "fit.v.03",
+          "fit.v.04"
         ],
         1
       ],
       [
         [
-          "ignite.v.01",
-          "ignite.v.03"
+          "eating.n.01",
+          "eating.n.01"
         ],
         1
       ],
       [
         [
-          "set_up.s.00",
-          "set_up.s.00"
+          "trail.v.02",
+          "trail.v.2;1"
         ],
         1
       ],
       [
         [
-          "rig.n.01",
-          "rig.n.01"
+          "go_forward.v.01",
+          "go_forward.v.01"
         ],
         1
       ],
       [
         [
-          "infect.v.00",
-          "infect.v.02"
+          "trade.n.02",
+          "trade.n.4;1"
         ],
         1
       ],
       [
         [
-          "active.a.03",
-          "active.s.08"
+          "refute.v.01",
+          "refute.v.02"
         ],
         1
       ],
       [
         [
-          "lump.n.01",
-          "lump.n.01"
+          "open_up.v.01",
+          "open_up.v.02"
         ],
         1
       ]
@@ -742,196 +742,196 @@
     "sample_errors": [
       {
         "index": 2,
-        "word": "arise",
+        "word": "divide",
         "pos": "verb",
-        "sense1": "arise.v.02",
-        "sense2": "arise.v.02",
+        "sense1": "divide.v.03",
+        "sense2": "divide.v.04",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Old attitudes are held more tenaciously in the Tidewater than the Piedmont ; so ",
+        "sentence2_preview": "Dirt , which is here defined as particulate material which is usually inorganic "
+      },
+      {
+        "index": 12,
+        "word": "control",
+        "pos": "verb",
+        "sense1": "control.v.01",
+        "sense2": "control.v.04",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "The efforts of various interest groups to control or influence governmental deci",
+        "sentence2_preview": "The failure at that time of the Puerto Rican bishops to control the votes of the"
+      },
+      {
+        "index": 14,
+        "word": "melody",
+        "pos": "noun",
+        "sense1": "melody.n.01",
+        "sense2": "melody.n.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "The lyric beauties of Schubert 's Trout Quintet - its elemental rhythms and infe",
+        "sentence2_preview": "In all his miscalculations , Stravinsky made the fatal historical blunder of pre"
+      },
+      {
+        "index": 15,
+        "word": "fit",
+        "pos": "verb",
+        "sense1": "fit.v.03",
+        "sense2": "fit.v.04",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Use wooden design head of mold for pattern C ; pattern D for lid fits over top d",
+        "sentence2_preview": "Some time in 1912 , Picasso cut out and folded a piece of paper in the shape of "
+      },
+      {
+        "index": 24,
+        "word": "eating",
+        "pos": "noun",
+        "sense1": "eating.n.01",
+        "sense2": "eating.n.01",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
-        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
-      },
-      {
-        "index": 3,
-        "word": "stimulate",
-        "pos": "verb",
-        "sense1": "stimulate.v.02",
-        "sense2": "stimulate.v.06",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "At 12 , Hans was sufficiently mature to help his father in the apothecary shop ,",
-        "sentence2_preview": "The overall effect was probably to stimulate more party activity in the communal"
-      },
-      {
-        "index": 5,
-        "word": "faded",
-        "pos": "adj",
-        "sense1": "faded.s.01",
-        "sense2": "faded.s.02",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "`` They were all faded .",
-        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
-      },
-      {
-        "index": 7,
-        "word": "fog",
-        "pos": "noun",
-        "sense1": "fog.n.01",
-        "sense2": "fog.n.2;1",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "I dig it , rake it smooth , sow the seeds and wet them down with a fog spray .",
-        "sentence2_preview": "Poor winds and fog locked her up in a harbor the crew called `` Lousie Bay '' ."
-      },
-      {
-        "index": 10,
-        "word": "ignite",
-        "pos": "verb",
-        "sense1": "ignite.v.01",
-        "sense2": "ignite.v.03",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "Assistant Fire Chief Chester Cornell said gas fumes apparently were ignited by a",
-        "sentence2_preview": "We were there at a moment when the situation in Laos threatened to ignite anothe"
+        "sentence1_preview": "Sometimes it takes several `` eatings '' of avocado to catch that delightful qua",
+        "sentence2_preview": "When improvements are recommended in working conditions - such as lighting , res"
       }
     ]
   },
   "SentenceBERT": {
-    "total_errors": 3175,
-    "error_rate": 0.42469234884965223,
+    "total_errors": 2512,
+    "error_rate": 0.4320605435156519,
     "top_confused_pairs": [
       [
         [
-          "arise.v.02",
-          "arise.v.02"
+          "mining.n.01",
+          "mining.n.01"
         ],
         1
       ],
       [
         [
-          "faded.s.01",
-          "faded.s.02"
+          "better.r.01",
+          "better.r.02"
         ],
         1
       ],
       [
         [
-          "see.v.18",
-          "see.v.5;2"
+          "plainly.r.01",
+          "plainly.r.01"
         ],
         1
       ],
       [
         [
-          "resonance.n.01",
-          "resonance.n.02"
+          "stick_to.v.01",
+          "stick_to.v.01"
         ],
         1
       ],
       [
         [
-          "rig.n.01",
-          "rig.n.01"
+          "abrupt.s.02",
+          "abrupt.s.02"
         ],
         1
       ],
       [
         [
-          "implication.n.01",
-          "implication.n.03"
+          "see.v.08",
+          "see.v.15;8"
         ],
         1
       ],
       [
         [
-          "bloom.n.02",
-          "bloom.n.03"
+          "eating.n.01",
+          "eating.n.01"
         ],
         1
       ],
       [
         [
-          "television.n.01",
-          "television.n.01"
+          "arise.v.04",
+          "arise.v.04"
         ],
         1
       ],
       [
         [
-          "human_body.n.01",
-          "human_body.n.01"
+          "trail.v.02",
+          "trail.v.2;1"
         ],
         1
       ],
       [
         [
-          "big.a.01",
-          "big.s.03"
+          "trade.v.02",
+          "trade.v.03"
         ],
         1
       ]
     ],
     "sample_errors": [
       {
-        "index": 2,
-        "word": "arise",
-        "pos": "verb",
-        "sense1": "arise.v.02",
-        "sense2": "arise.v.02",
-        "true_label": 1,
-        "pred_label": 0,
-        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
-        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
-      },
-      {
         "index": 5,
-        "word": "faded",
-        "pos": "adj",
-        "sense1": "faded.s.01",
-        "sense2": "faded.s.02",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "`` They were all faded .",
-        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
-      },
-      {
-        "index": 6,
-        "word": "see",
-        "pos": "verb",
-        "sense1": "see.v.18",
-        "sense2": "see.v.5;2",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "`` Well , let 's see .",
-        "sentence2_preview": "We can see others more clearly than we can see ourselves , and others can see us"
-      },
-      {
-        "index": 11,
-        "word": "resonance",
+        "word": "mining",
         "pos": "noun",
-        "sense1": "resonance.n.01",
-        "sense2": "resonance.n.02",
-        "true_label": 0,
-        "pred_label": 1,
-        "sentence1_preview": "The data reported here are either from spectra from which the adsorbed water res",
-        "sentence2_preview": "The timbre remains that of the instruments unclouded by resonance ."
-      },
-      {
-        "index": 15,
-        "word": "rig",
-        "pos": "noun",
-        "sense1": "rig.n.01",
-        "sense2": "rig.n.01",
+        "sense1": "mining.n.01",
+        "sense2": "mining.n.01",
         "true_label": 1,
         "pred_label": 0,
-        "sentence1_preview": "If an expensive and specialized piece of machinery is needed - such as a spray r",
-        "sentence2_preview": "Men crowded the streets and freight rigs and teams were moving about ."
+        "sentence1_preview": "At any cost , he must leave the dreary Pennsylvania mining town where his father",
+        "sentence2_preview": "Be it enacted by the Senate and House of Representatives of the United States of"
+      },
+      {
+        "index": 10,
+        "word": "better",
+        "pos": "adv",
+        "sense1": "better.r.01",
+        "sense2": "better.r.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Few writers have better understood their deepest selves .",
+        "sentence2_preview": "`` Sir , Vaughn knows better than to leave the station without a relief ."
+      },
+      {
+        "index": 16,
+        "word": "plainly",
+        "pos": "adv",
+        "sense1": "plainly.r.01",
+        "sense2": "plainly.r.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "When we come upon the rabbit and make our remark about its suffering being a bad",
+        "sentence2_preview": "The characteristic polynomial for A is * * f and this is plainly also the minima"
+      },
+      {
+        "index": 18,
+        "word": "stick to",
+        "pos": "verb",
+        "sense1": "stick_to.v.01",
+        "sense2": "stick_to.v.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "Water from the snow and water from the towels had run off the kid to the table w",
+        "sentence2_preview": "Likewise , a charged particle will tend to stick to an uncharged surface and vic"
+      },
+      {
+        "index": 20,
+        "word": "abrupt",
+        "pos": "adj",
+        "sense1": "abrupt.s.02",
+        "sense2": "abrupt.s.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "A naval blockade would be thoroughly in line with the Monroe Doctrine , would be",
+        "sentence2_preview": "His casual , dreamlike working methods , often as not in absentia , were an abru"
       }
     ]
   },
   "cross_model": {
-    "BERT_wrong_BiLSTM_right": 744,
-    "BiLSTM_wrong_BERT_right": 1668
+    "BERT_wrong_BiLSTM_right": 631,
+    "BiLSTM_wrong_BERT_right": 1207
   }
 }

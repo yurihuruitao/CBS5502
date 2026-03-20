@@ -1,44 +1,44 @@
 {
   "Majority": {
-    "accuracy": 0.6111556982343499,
-    "precision_macro": 0.30557784911717495,
+    "accuracy": 0.5,
+    "precision_macro": 0.25,
     "recall_macro": 0.5,
-    "f1_macro": 0.3793275217932752
+    "f1_macro": 0.3333333333333333
   },
   "Random": {
-    "accuracy": 0.5224719101123596,
-    "precision_macro": 0.493986407402234,
-    "recall_macro": 0.49407807495255074,
-    "f1_macro": 0.49391084715680256
+    "accuracy": 0.4846921224630203,
+    "precision_macro": 0.48469205725075803,
+    "recall_macro": 0.4846921224630203,
+    "f1_macro": 0.4846915736559598
   },
   "BiLSTM": {
-    "accuracy": 0.6276083467094703,
-    "precision_macro": 0.6525666406429426,
-    "recall_macro": 0.655296236290648,
-    "f1_macro": 0.6274419404910485
+    "accuracy": 0.6491228070175439,
+    "precision_macro": 0.65921823919038,
+    "recall_macro": 0.6491228070175439,
+    "f1_macro": 0.6434712691691277
   },
   "BERT-Frozen+MLP": {
-    "accuracy": 0.7391653290529695,
-    "precision_macro": 0.7256717143613973,
-    "recall_macro": 0.7262296885209948,
-    "f1_macro": 0.7259448981220058
+    "accuracy": 0.7213622291021672,
+    "precision_macro": 0.7217657330118421,
+    "recall_macro": 0.7213622291021672,
+    "f1_macro": 0.721235425702381
   },
   "BERT": {
-    "accuracy": 0.7512038523274478,
-    "precision_macro": 0.7412481051524091,
-    "recall_macro": 0.7500307745404091,
-    "f1_macro": 0.7436175230166688
+    "accuracy": 0.7481940144478845,
+    "precision_macro": 0.7484114238907682,
+    "recall_macro": 0.7481940144478845,
+    "f1_macro": 0.748138907300445
   },
   "RoBERTa": {
-    "accuracy": 0.7366238630283574,
-    "precision_macro": 0.7293808479852171,
-    "recall_macro": 0.739854396332262,
-    "f1_macro": 0.730565920247187
+    "accuracy": 0.7468180254557963,
+    "precision_macro": 0.7479451650946901,
+    "recall_macro": 0.7468180254557963,
+    "f1_macro": 0.7465299616338972
   },
   "SentenceBERT": {
-    "accuracy": 0.5753076511503478,
-    "precision_macro": 0.5657410772456233,
-    "recall_macro": 0.5685869076409175,
-    "f1_macro": 0.5646260175403828
+    "accuracy": 0.5679394564843481,
+    "precision_macro": 0.567988404376069,
+    "recall_macro": 0.5679394564843481,
+    "f1_macro": 0.5678616775600984
   }
 }
