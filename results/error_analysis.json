@@ -1,0 +1,937 @@
+{
+  "Majority": {
+    "total_errors": 2907,
+    "error_rate": 0.3888443017656501,
+    "top_confused_pairs": [
+      [
+        [
+          "field.n.06",
+          "field.n.06"
+        ],
+        1
+      ],
+      [
+        [
+          "arise.v.02",
+          "arise.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "concern.n.02",
+          "concern.n.02"
+        ],
+        1
+      ],
+      [
+        [
+          "set_up.s.00",
+          "set_up.s.00"
+        ],
+        1
+      ],
+      [
+        [
+          "rig.n.01",
+          "rig.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "airspeed.n.01",
+          "airspeed.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "lump.n.01",
+          "lump.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "television.n.01",
+          "television.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "taxi.v.01",
+          "taxi.v.01"
+        ],
+        1
+      ],
+      [
+        [
+          "reading.n.01",
+          "reading.n.01"
+        ],
+        1
+      ]
+    ],
+    "sample_errors": [
+      {
+        "index": 1,
+        "word": "field",
+        "pos": "noun",
+        "sense1": "field.n.06",
+        "sense2": "field.n.06",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "If private brand competition has n't been felt in your product field as yet , ha",
+        "sentence2_preview": "Your competition is now proportionately greater - you are competing not only aga"
+      },
+      {
+        "index": 2,
+        "word": "arise",
+        "pos": "verb",
+        "sense1": "arise.v.02",
+        "sense2": "arise.v.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
+        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+      },
+      {
+        "index": 12,
+        "word": "concern",
+        "pos": "noun",
+        "sense1": "concern.n.02",
+        "sense2": "concern.n.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "His religious beliefs provide him with plausible explanations for many condition",
+        "sentence2_preview": "The conversation of the characters creates an atmosphere suggesting the usual mi"
+      },
+      {
+        "index": 13,
+        "word": "set up",
+        "pos": "adj",
+        "sense1": "set_up.s.00",
+        "sense2": "set_up.s.00",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "Above all , do n't set up extravagant fringe benefits just to buy employee good ",
+        "sentence2_preview": "`` Those are the things I can do , now that I 'm set up '' ."
+      },
+      {
+        "index": 15,
+        "word": "rig",
+        "pos": "noun",
+        "sense1": "rig.n.01",
+        "sense2": "rig.n.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "If an expensive and specialized piece of machinery is needed - such as a spray r",
+        "sentence2_preview": "Men crowded the streets and freight rigs and teams were moving about ."
+      }
+    ]
+  },
+  "Random": {
+    "total_errors": 3570,
+    "error_rate": 0.47752808988764045,
+    "top_confused_pairs": [
+      [
+        [
+          "field.n.06",
+          "field.n.06"
+        ],
+        1
+      ],
+      [
+        [
+          "arise.v.02",
+          "arise.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "flash.v.04",
+          "flash.v.06"
+        ],
+        1
+      ],
+      [
+        [
+          "faded.s.01",
+          "faded.s.02"
+        ],
+        1
+      ],
+      [
+        [
+          "see.v.18",
+          "see.v.5;2"
+        ],
+        1
+      ],
+      [
+        [
+          "ignite.v.01",
+          "ignite.v.03"
+        ],
+        1
+      ],
+      [
+        [
+          "concern.n.02",
+          "concern.n.02"
+        ],
+        1
+      ],
+      [
+        [
+          "see.v.12",
+          "see.v.16"
+        ],
+        1
+      ],
+      [
+        [
+          "implication.n.01",
+          "implication.n.03"
+        ],
+        1
+      ],
+      [
+        [
+          "division.n.02",
+          "division.n.05"
+        ],
+        1
+      ]
+    ],
+    "sample_errors": [
+      {
+        "index": 1,
+        "word": "field",
+        "pos": "noun",
+        "sense1": "field.n.06",
+        "sense2": "field.n.06",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "If private brand competition has n't been felt in your product field as yet , ha",
+        "sentence2_preview": "Your competition is now proportionately greater - you are competing not only aga"
+      },
+      {
+        "index": 2,
+        "word": "arise",
+        "pos": "verb",
+        "sense1": "arise.v.02",
+        "sense2": "arise.v.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
+        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+      },
+      {
+        "index": 4,
+        "word": "flash",
+        "pos": "verb",
+        "sense1": "flash.v.04",
+        "sense2": "flash.v.06",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` The pattern '' , says Dr. Morton Schillinger , psychologist at New York 's Li",
+        "sentence2_preview": "Her voice was ripe and full and her teeth flashed again in Sicilian brilliance b"
+      },
+      {
+        "index": 5,
+        "word": "faded",
+        "pos": "adj",
+        "sense1": "faded.s.01",
+        "sense2": "faded.s.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` They were all faded .",
+        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
+      },
+      {
+        "index": 6,
+        "word": "see",
+        "pos": "verb",
+        "sense1": "see.v.18",
+        "sense2": "see.v.5;2",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` Well , let 's see .",
+        "sentence2_preview": "We can see others more clearly than we can see ourselves , and others can see us"
+      }
+    ]
+  },
+  "BiLSTM": {
+    "total_errors": 2784,
+    "error_rate": 0.3723916532905297,
+    "top_confused_pairs": [
+      [
+        [
+          "field.n.06",
+          "field.n.06"
+        ],
+        1
+      ],
+      [
+        [
+          "stimulate.v.02",
+          "stimulate.v.06"
+        ],
+        1
+      ],
+      [
+        [
+          "flash.v.04",
+          "flash.v.06"
+        ],
+        1
+      ],
+      [
+        [
+          "faded.s.01",
+          "faded.s.02"
+        ],
+        1
+      ],
+      [
+        [
+          "fog.n.01",
+          "fog.n.2;1"
+        ],
+        1
+      ],
+      [
+        [
+          "ignite.v.01",
+          "ignite.v.03"
+        ],
+        1
+      ],
+      [
+        [
+          "resonance.n.01",
+          "resonance.n.02"
+        ],
+        1
+      ],
+      [
+        [
+          "set_up.s.00",
+          "set_up.s.00"
+        ],
+        1
+      ],
+      [
+        [
+          "implication.n.01",
+          "implication.n.03"
+        ],
+        1
+      ],
+      [
+        [
+          "infect.v.00",
+          "infect.v.02"
+        ],
+        1
+      ]
+    ],
+    "sample_errors": [
+      {
+        "index": 1,
+        "word": "field",
+        "pos": "noun",
+        "sense1": "field.n.06",
+        "sense2": "field.n.06",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "If private brand competition has n't been felt in your product field as yet , ha",
+        "sentence2_preview": "Your competition is now proportionately greater - you are competing not only aga"
+      },
+      {
+        "index": 3,
+        "word": "stimulate",
+        "pos": "verb",
+        "sense1": "stimulate.v.02",
+        "sense2": "stimulate.v.06",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "At 12 , Hans was sufficiently mature to help his father in the apothecary shop ,",
+        "sentence2_preview": "The overall effect was probably to stimulate more party activity in the communal"
+      },
+      {
+        "index": 4,
+        "word": "flash",
+        "pos": "verb",
+        "sense1": "flash.v.04",
+        "sense2": "flash.v.06",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` The pattern '' , says Dr. Morton Schillinger , psychologist at New York 's Li",
+        "sentence2_preview": "Her voice was ripe and full and her teeth flashed again in Sicilian brilliance b"
+      },
+      {
+        "index": 5,
+        "word": "faded",
+        "pos": "adj",
+        "sense1": "faded.s.01",
+        "sense2": "faded.s.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` They were all faded .",
+        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
+      },
+      {
+        "index": 7,
+        "word": "fog",
+        "pos": "noun",
+        "sense1": "fog.n.01",
+        "sense2": "fog.n.2;1",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "I dig it , rake it smooth , sow the seeds and wet them down with a fog spray .",
+        "sentence2_preview": "Poor winds and fog locked her up in a harbor the crew called `` Lousie Bay '' ."
+      }
+    ]
+  },
+  "BERT-Frozen+MLP": {
+    "total_errors": 1950,
+    "error_rate": 0.2608346709470305,
+    "top_confused_pairs": [
+      [
+        [
+          "arise.v.02",
+          "arise.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "stimulate.v.02",
+          "stimulate.v.06"
+        ],
+        1
+      ],
+      [
+        [
+          "fog.n.01",
+          "fog.n.2;1"
+        ],
+        1
+      ],
+      [
+        [
+          "resonance.n.01",
+          "resonance.n.02"
+        ],
+        1
+      ],
+      [
+        [
+          "set_up.s.00",
+          "set_up.s.00"
+        ],
+        1
+      ],
+      [
+        [
+          "pleasant.a.01",
+          "pleasant.s.02"
+        ],
+        1
+      ],
+      [
+        [
+          "reach.n.03",
+          "reach.n.04"
+        ],
+        1
+      ],
+      [
+        [
+          "television.n.01",
+          "television.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "will.v.01",
+          "will.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "rest.v.03",
+          "rest.v.03"
+        ],
+        1
+      ]
+    ],
+    "sample_errors": [
+      {
+        "index": 2,
+        "word": "arise",
+        "pos": "verb",
+        "sense1": "arise.v.02",
+        "sense2": "arise.v.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
+        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+      },
+      {
+        "index": 3,
+        "word": "stimulate",
+        "pos": "verb",
+        "sense1": "stimulate.v.02",
+        "sense2": "stimulate.v.06",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "At 12 , Hans was sufficiently mature to help his father in the apothecary shop ,",
+        "sentence2_preview": "The overall effect was probably to stimulate more party activity in the communal"
+      },
+      {
+        "index": 7,
+        "word": "fog",
+        "pos": "noun",
+        "sense1": "fog.n.01",
+        "sense2": "fog.n.2;1",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "I dig it , rake it smooth , sow the seeds and wet them down with a fog spray .",
+        "sentence2_preview": "Poor winds and fog locked her up in a harbor the crew called `` Lousie Bay '' ."
+      },
+      {
+        "index": 11,
+        "word": "resonance",
+        "pos": "noun",
+        "sense1": "resonance.n.01",
+        "sense2": "resonance.n.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "The data reported here are either from spectra from which the adsorbed water res",
+        "sentence2_preview": "The timbre remains that of the instruments unclouded by resonance ."
+      },
+      {
+        "index": 13,
+        "word": "set up",
+        "pos": "adj",
+        "sense1": "set_up.s.00",
+        "sense2": "set_up.s.00",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "Above all , do n't set up extravagant fringe benefits just to buy employee good ",
+        "sentence2_preview": "`` Those are the things I can do , now that I 'm set up '' ."
+      }
+    ]
+  },
+  "BERT": {
+    "total_errors": 1860,
+    "error_rate": 0.24879614767255218,
+    "top_confused_pairs": [
+      [
+        [
+          "arise.v.02",
+          "arise.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "stimulate.v.02",
+          "stimulate.v.06"
+        ],
+        1
+      ],
+      [
+        [
+          "faded.s.01",
+          "faded.s.02"
+        ],
+        1
+      ],
+      [
+        [
+          "fog.n.01",
+          "fog.n.2;1"
+        ],
+        1
+      ],
+      [
+        [
+          "concern.n.02",
+          "concern.n.02"
+        ],
+        1
+      ],
+      [
+        [
+          "set_up.s.00",
+          "set_up.s.00"
+        ],
+        1
+      ],
+      [
+        [
+          "rig.n.01",
+          "rig.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "implication.n.01",
+          "implication.n.03"
+        ],
+        1
+      ],
+      [
+        [
+          "infect.v.00",
+          "infect.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "active.a.03",
+          "active.s.08"
+        ],
+        1
+      ]
+    ],
+    "sample_errors": [
+      {
+        "index": 2,
+        "word": "arise",
+        "pos": "verb",
+        "sense1": "arise.v.02",
+        "sense2": "arise.v.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
+        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+      },
+      {
+        "index": 3,
+        "word": "stimulate",
+        "pos": "verb",
+        "sense1": "stimulate.v.02",
+        "sense2": "stimulate.v.06",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "At 12 , Hans was sufficiently mature to help his father in the apothecary shop ,",
+        "sentence2_preview": "The overall effect was probably to stimulate more party activity in the communal"
+      },
+      {
+        "index": 5,
+        "word": "faded",
+        "pos": "adj",
+        "sense1": "faded.s.01",
+        "sense2": "faded.s.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` They were all faded .",
+        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
+      },
+      {
+        "index": 7,
+        "word": "fog",
+        "pos": "noun",
+        "sense1": "fog.n.01",
+        "sense2": "fog.n.2;1",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "I dig it , rake it smooth , sow the seeds and wet them down with a fog spray .",
+        "sentence2_preview": "Poor winds and fog locked her up in a harbor the crew called `` Lousie Bay '' ."
+      },
+      {
+        "index": 12,
+        "word": "concern",
+        "pos": "noun",
+        "sense1": "concern.n.02",
+        "sense2": "concern.n.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "His religious beliefs provide him with plausible explanations for many condition",
+        "sentence2_preview": "The conversation of the characters creates an atmosphere suggesting the usual mi"
+      }
+    ]
+  },
+  "RoBERTa": {
+    "total_errors": 1969,
+    "error_rate": 0.2633761369716426,
+    "top_confused_pairs": [
+      [
+        [
+          "arise.v.02",
+          "arise.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "stimulate.v.02",
+          "stimulate.v.06"
+        ],
+        1
+      ],
+      [
+        [
+          "faded.s.01",
+          "faded.s.02"
+        ],
+        1
+      ],
+      [
+        [
+          "fog.n.01",
+          "fog.n.2;1"
+        ],
+        1
+      ],
+      [
+        [
+          "ignite.v.01",
+          "ignite.v.03"
+        ],
+        1
+      ],
+      [
+        [
+          "set_up.s.00",
+          "set_up.s.00"
+        ],
+        1
+      ],
+      [
+        [
+          "rig.n.01",
+          "rig.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "infect.v.00",
+          "infect.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "active.a.03",
+          "active.s.08"
+        ],
+        1
+      ],
+      [
+        [
+          "lump.n.01",
+          "lump.n.01"
+        ],
+        1
+      ]
+    ],
+    "sample_errors": [
+      {
+        "index": 2,
+        "word": "arise",
+        "pos": "verb",
+        "sense1": "arise.v.02",
+        "sense2": "arise.v.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
+        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+      },
+      {
+        "index": 3,
+        "word": "stimulate",
+        "pos": "verb",
+        "sense1": "stimulate.v.02",
+        "sense2": "stimulate.v.06",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "At 12 , Hans was sufficiently mature to help his father in the apothecary shop ,",
+        "sentence2_preview": "The overall effect was probably to stimulate more party activity in the communal"
+      },
+      {
+        "index": 5,
+        "word": "faded",
+        "pos": "adj",
+        "sense1": "faded.s.01",
+        "sense2": "faded.s.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` They were all faded .",
+        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
+      },
+      {
+        "index": 7,
+        "word": "fog",
+        "pos": "noun",
+        "sense1": "fog.n.01",
+        "sense2": "fog.n.2;1",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "I dig it , rake it smooth , sow the seeds and wet them down with a fog spray .",
+        "sentence2_preview": "Poor winds and fog locked her up in a harbor the crew called `` Lousie Bay '' ."
+      },
+      {
+        "index": 10,
+        "word": "ignite",
+        "pos": "verb",
+        "sense1": "ignite.v.01",
+        "sense2": "ignite.v.03",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "Assistant Fire Chief Chester Cornell said gas fumes apparently were ignited by a",
+        "sentence2_preview": "We were there at a moment when the situation in Laos threatened to ignite anothe"
+      }
+    ]
+  },
+  "SentenceBERT": {
+    "total_errors": 3175,
+    "error_rate": 0.42469234884965223,
+    "top_confused_pairs": [
+      [
+        [
+          "arise.v.02",
+          "arise.v.02"
+        ],
+        1
+      ],
+      [
+        [
+          "faded.s.01",
+          "faded.s.02"
+        ],
+        1
+      ],
+      [
+        [
+          "see.v.18",
+          "see.v.5;2"
+        ],
+        1
+      ],
+      [
+        [
+          "resonance.n.01",
+          "resonance.n.02"
+        ],
+        1
+      ],
+      [
+        [
+          "rig.n.01",
+          "rig.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "implication.n.01",
+          "implication.n.03"
+        ],
+        1
+      ],
+      [
+        [
+          "bloom.n.02",
+          "bloom.n.03"
+        ],
+        1
+      ],
+      [
+        [
+          "television.n.01",
+          "television.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "human_body.n.01",
+          "human_body.n.01"
+        ],
+        1
+      ],
+      [
+        [
+          "big.a.01",
+          "big.s.03"
+        ],
+        1
+      ]
+    ],
+    "sample_errors": [
+      {
+        "index": 2,
+        "word": "arise",
+        "pos": "verb",
+        "sense1": "arise.v.02",
+        "sense2": "arise.v.02",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "The Commission shall complete its affairs in connection with settlement of Unite",
+        "sentence2_preview": "LEAVING ASIDE the choice of unilateral cessation of tests as neither sane nor cl"
+      },
+      {
+        "index": 5,
+        "word": "faded",
+        "pos": "adj",
+        "sense1": "faded.s.01",
+        "sense2": "faded.s.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` They were all faded .",
+        "sentence2_preview": "The twenty-five year old recording offers rather faded string tone , but the bal"
+      },
+      {
+        "index": 6,
+        "word": "see",
+        "pos": "verb",
+        "sense1": "see.v.18",
+        "sense2": "see.v.5;2",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "`` Well , let 's see .",
+        "sentence2_preview": "We can see others more clearly than we can see ourselves , and others can see us"
+      },
+      {
+        "index": 11,
+        "word": "resonance",
+        "pos": "noun",
+        "sense1": "resonance.n.01",
+        "sense2": "resonance.n.02",
+        "true_label": 0,
+        "pred_label": 1,
+        "sentence1_preview": "The data reported here are either from spectra from which the adsorbed water res",
+        "sentence2_preview": "The timbre remains that of the instruments unclouded by resonance ."
+      },
+      {
+        "index": 15,
+        "word": "rig",
+        "pos": "noun",
+        "sense1": "rig.n.01",
+        "sense2": "rig.n.01",
+        "true_label": 1,
+        "pred_label": 0,
+        "sentence1_preview": "If an expensive and specialized piece of machinery is needed - such as a spray r",
+        "sentence2_preview": "Men crowded the streets and freight rigs and teams were moving about ."
+      }
+    ]
+  },
+  "cross_model": {
+    "BERT_wrong_BiLSTM_right": 744,
+    "BiLSTM_wrong_BERT_right": 1668
+  }
+}

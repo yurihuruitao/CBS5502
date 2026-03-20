@@ -1,0 +1,44 @@
+{
+  "Majority": {
+    "accuracy": 0.6111556982343499,
+    "precision_macro": 0.30557784911717495,
+    "recall_macro": 0.5,
+    "f1_macro": 0.3793275217932752
+  },
+  "Random": {
+    "accuracy": 0.5224719101123596,
+    "precision_macro": 0.493986407402234,
+    "recall_macro": 0.49407807495255074,
+    "f1_macro": 0.49391084715680256
+  },
+  "BiLSTM": {
+    "accuracy": 0.6276083467094703,
+    "precision_macro": 0.6525666406429426,
+    "recall_macro": 0.655296236290648,
+    "f1_macro": 0.6274419404910485
+  },
+  "BERT-Frozen+MLP": {
+    "accuracy": 0.7391653290529695,
+    "precision_macro": 0.7256717143613973,
+    "recall_macro": 0.7262296885209948,
+    "f1_macro": 0.7259448981220058
+  },
+  "BERT": {
+    "accuracy": 0.7512038523274478,
+    "precision_macro": 0.7412481051524091,
+    "recall_macro": 0.7500307745404091,
+    "f1_macro": 0.7436175230166688
+  },
+  "RoBERTa": {
+    "accuracy": 0.7366238630283574,
+    "precision_macro": 0.7293808479852171,
+    "recall_macro": 0.739854396332262,
+    "f1_macro": 0.730565920247187
+  },
+  "SentenceBERT": {
+    "accuracy": 0.5753076511503478,
+    "precision_macro": 0.5657410772456233,
+    "recall_macro": 0.5685869076409175,
+    "f1_macro": 0.5646260175403828
+  }
+}

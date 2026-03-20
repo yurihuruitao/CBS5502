@@ -1,0 +1,72 @@
+{
+  "BiLSTM": {
+    "test": {
+      "accuracy": 0.5307142857142857,
+      "precision_macro": 0.5346909280341885,
+      "recall_macro": 0.5307142857142857,
+      "f1_macro": 0.5168688817442304
+    },
+    "dev": {
+      "accuracy": 0.5360501567398119,
+      "precision_macro": 0.5411188450631605,
+      "recall_macro": 0.5360501567398119,
+      "f1_macro": 0.521297845373891
+    }
+  },
+  "BERT-Frozen+MLP": {
+    "test": {
+      "accuracy": 0.6114285714285714,
+      "precision_macro": 0.6224489795918368,
+      "recall_macro": 0.6114285714285714,
+      "f1_macro": 0.6024844720496894
+    },
+    "dev": {
+      "accuracy": 0.6379310344827587,
+      "precision_macro": 0.6546905307705873,
+      "recall_macro": 0.6379310344827587,
+      "f1_macro": 0.6278511889581055
+    }
+  },
+  "BERT": {
+    "test": {
+      "accuracy": 0.6664285714285715,
+      "precision_macro": 0.6837642949692975,
+      "recall_macro": 0.6664285714285714,
+      "f1_macro": 0.658371543154237
+    },
+    "dev": {
+      "accuracy": 0.6692789968652038,
+      "precision_macro": 0.6925983899821109,
+      "recall_macro": 0.6692789968652038,
+      "f1_macro": 0.6589557740491433
+    }
+  },
+  "RoBERTa": {
+    "test": {
+      "accuracy": 0.655,
+      "precision_macro": 0.6636574807306515,
+      "recall_macro": 0.655,
+      "f1_macro": 0.6503762255833396
+    },
+    "dev": {
+      "accuracy": 0.6661442006269592,
+      "precision_macro": 0.6788419226538038,
+      "recall_macro": 0.6661442006269592,
+      "f1_macro": 0.660111200318144
+    }
+  },
+  "SentenceBERT": {
+    "test": {
+      "accuracy": 0.5228571428571429,
+      "precision_macro": 0.522974358974359,
+      "recall_macro": 0.5228571428571429,
+      "f1_macro": 0.5222477650063857
+    },
+    "dev": {
+      "accuracy": 0.5846394984326019,
+      "precision_macro": 0.5846403301886792,
+      "recall_macro": 0.5846394984326019,
+      "f1_macro": 0.584638477998639
+    }
+  }
+}

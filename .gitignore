@@ -1,0 +1,21 @@
+# Large files stored on Google Drive
+# gdrive:workspace/CBS5502/models/
+models/*.pt
+
+# gdrive:workspace/CBS5502/corpus/
+data/glove.6B.100d.txt
+data/raw/wic_dataset.jsonl
+
+# NLTK data (downloadable)
+nltk_data/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
