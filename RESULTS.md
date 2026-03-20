@@ -11,7 +11,9 @@
 | EPOCHS | 8 | |
 | PATIENCE | 3 | Early stopping 耐心值 |
 
-各模型保留特有的学习率：BERT (3e-5)、RoBERTa (2e-5)、BiLSTM (1e-3)、BERT Frozen MLP (1e-3)。
+各模型保留特有的学习率：BERT (3e-5)、RoBERTa (2e-5)、DeBERTa-v3 (2e-5)、BiLSTM (1e-3)、BERT Frozen MLP (1e-3)。
+
+DeBERTa-v3-base 使用独立超参数：EPOCHS=10, PATIENCE=5, WARMUP_RATIO=0.1, WEIGHT_DECAY=0.01, BF16 混合精度（不兼容 FP16）。分类头采用 `[CLS; t1; t2; t1-t2; t1*t2]` 五路拼接 + 两层 MLP，类别权重使用 sqrt 平滑（1.31）。
 
 ---
 
@@ -57,6 +59,18 @@
 | 6 | 0.1156 | 0.7176 |
 | 7 | 0.0763 | 0.7233 |
 
+### DeBERTa-v3-base Fine-tune（Early stop at epoch 7）
+
+| Epoch | Loss | Dev F1 |
+|-------|------|--------|
+| 1 | 0.6290 | 0.7059 |
+| 2 | 0.5100 | **0.7360** |
+| 3 | 0.4300 | 0.7097 |
+| 4 | 0.3589 | 0.7180 |
+| 5 | 0.2878 | 0.7139 |
+| 6 | 0.2274 | 0.6812 |
+| 7 | 0.1780 | 0.7107 |
+
 ### Sentence-BERT
 
 无训练过程，在 dev 集搜索最优余弦相似度阈值：最优阈值 = 0.57，dev macro-F1 = 0.5569。
@@ -73,12 +87,13 @@
 | BiLSTM | 0.6276 | 0.6526 | 0.6553 | 0.6274 |
 | BERT Frozen + MLP | 0.7392 | 0.7257 | 0.7262 | 0.7259 |
 | RoBERTa Fine-tune | 0.7366 | 0.7294 | 0.7399 | 0.7306 |
+| DeBERTa-v3 Fine-tune | 0.7552 | 0.7435 | 0.7343 | 0.7379 |
 | **BERT Fine-tune** | **0.7512** | **0.7412** | **0.7500** | **0.7436** |
 
 **关键发现：**
 
 - **随机猜测基线（Random Baseline）** 的 Macro-F1 为 0.4937（因正负样本不平衡，略低于 0.50）；多数类基线（Majority Baseline）虽然 Accuracy 达到 0.6112，但由于完全忽略正类，Macro-F1 仅 0.3793。所有模型均显著超过这两个基线。
-- **BERT Fine-tune 以 0.7436 的 Macro-F1 位列第一**，略优于 RoBERTa（0.7306）。在统一超参数后，两者差距缩小到约 1.3 个点，说明在相同条件下 BERT 和 RoBERTa 的实际能力接近。
+- **BERT Fine-tune 以 0.7436 的 Macro-F1 位列第一**，略优于 DeBERTa-v3（0.7379）和 RoBERTa（0.7306）。DeBERTa-v3 虽然在 Accuracy 上最高（0.7552），但 Macro-F1 略低于 BERT，主要因为 Recall 偏低（0.7343 vs 0.7500），说明 DeBERTa-v3 倾向于更保守的预测。三个 Transformer 微调模型差距在 1.3 个点以内，说明在相同条件下它们的实际能力接近。
 - **BERT Fine-tune（0.7436）显著优于 BERT Frozen + MLP（0.7259）**，差距约 1.8 个点。微调让 BERT 学会了针对 WIC 任务优化其上下文表示，而不是仅靠通用预训练特征。
 - **BiLSTM（0.6274）远高于 Sentence-BERT（0.5643）**。Sentence-BERT 使用整句级别的 mean pooling，丢失了目标词位置信息，在需要精确定位目标词语义的 WIC 任务中表现不佳；而 BiLSTM 虽然基于静态词向量，但通过 LSTM 上下文建模并精准提取目标词位置的隐状态，依然能有效区分词义。
 - 所有 Transformer 微调模型的 loss 在训练过程中持续下降，但 dev F1 在 epoch 2-4 后开始停滞或下降，说明存在一定程度的过拟合，early stopping 有效防止了进一步退化。

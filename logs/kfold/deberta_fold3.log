@@ -1,0 +1,18 @@
+Device: cuda  Fold: 3
+超参数: model=microsoft/deberta-v3-base, lr=2e-05, epochs=10, batch=32, freeze=0, patience=5, warmup=0.1, weight_decay=0.01
+数据: train=29145, dev=11571, test=10053
+类别权重: neg=1.0000, pos=1.2498
+Epoch 1/10  train_loss=0.6616  dev_macro-F1=0.6493  lr=2.00e-05
+Epoch 2/10  train_loss=0.6570  dev_macro-F1=0.4009  lr=1.78e-05
+Epoch 3/10  train_loss=0.6418  dev_macro-F1=0.4009  lr=1.56e-05
+Epoch 4/10  train_loss=0.6888  dev_macro-F1=0.4006  lr=1.33e-05
+Epoch 5/10  train_loss=0.6869  dev_macro-F1=0.4006  lr=1.11e-05
+Epoch 6/10  train_loss=0.6820  dev_macro-F1=0.4057  lr=8.89e-06
+Early stopping at epoch 6
+最优 dev macro-F1: 0.6493
+
+[DeBERTa (fold=3)] 评估结果:
+  Accuracy:    0.6076
+  Precision:   0.6772
+  Recall:      0.6629
+  Macro-F1:    0.6061

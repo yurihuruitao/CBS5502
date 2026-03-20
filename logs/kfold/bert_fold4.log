@@ -1,0 +1,18 @@
+Device: cuda  Fold: 4
+超参数: model=bert-base-uncased, lr=3e-05, epochs=8, batch=32, freeze=0, patience=3, warmup=0.1, weight_decay=0.01
+数据: train=28387, dev=10811, test=11571
+类别权重: neg=1.0000, pos=1.5161
+Epoch 1/8  train_loss=0.5746  dev_macro-F1=0.7243  lr=2.92e-05
+Epoch 2/8  train_loss=0.4253  dev_macro-F1=0.6883  lr=2.50e-05
+Epoch 3/8  train_loss=0.2172  dev_macro-F1=0.7278  lr=2.08e-05
+Epoch 4/8  train_loss=0.0898  dev_macro-F1=0.7277  lr=1.67e-05
+Epoch 5/8  train_loss=0.0450  dev_macro-F1=0.7275  lr=1.25e-05
+Epoch 6/8  train_loss=0.0242  dev_macro-F1=0.7269  lr=8.33e-06
+Early stopping at epoch 6
+最优 dev macro-F1: 0.7278
+
+[BERT (fold=4)] 评估结果:
+  Accuracy:    0.7743
+  Precision:   0.7470
+  Recall:      0.7585
+  Macro-F1:    0.7516

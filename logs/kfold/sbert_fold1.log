@@ -1,0 +1,9 @@
+Device: cuda  Fold: 1
+超参数: model=sentence-transformers/all-MiniLM-L6-v2, threshold_range=(0.5, 1.0, 0.01)
+最优阈值: 0.56  dev_macro-F1: 0.5530
+
+[SentenceBERT (fold=1)] 评估结果:
+  Accuracy:    0.5869
+  Precision:   0.5742
+  Recall:      0.5737
+  Macro-F1:    0.5739

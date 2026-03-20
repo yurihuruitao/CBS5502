@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, DataLoader, TensorDataset
 from sklearn.metrics import f1_score as sklearn_f1
 from transformers import AutoTokenizer, BertModel
 from tqdm import tqdm
-from utils import load_split, evaluate, MODEL_DIR
+from utils import load_split, evaluate, MODEL_DIR, set_seed, save_predictions, load_kfold
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -30,7 +30,9 @@ def extract_embeddings(samples, tokenizer, bert, batch_size=64):
     bert.eval()
     all_feats, all_labels = [], []
 
-    for i in tqdm(range(0, len(samples), batch_size), desc="Extracting embeddings"):
+    import sys as _sys
+    for i in tqdm(range(0, len(samples), batch_size), desc="Extracting embeddings",
+                  file=_sys.stderr):
         batch = samples[i:i + batch_size]
         encs = tokenizer(
             [s["sentence1"] for s in batch],
@@ -90,7 +92,27 @@ class MLP(nn.Module):
 
 
 if __name__ == "__main__":
-    print(f"Device: {DEVICE}")
+    import sys, logging, os, argparse
+    os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--fold", type=int, default=None)
+    args = parser.parse_args()
+    fold = args.fold
+    set_seed(42)
+
+    logging.basicConfig(level=logging.WARNING)
+    for noisy in ("httpx", "urllib3", "transformers", "huggingface_hub", "filelock"):
+        logging.getLogger(noisy).setLevel(logging.ERROR)
+
+    log = logging.getLogger("bert_frozen_train")
+    log.setLevel(logging.INFO)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(logging.Formatter("%(message)s"))
+    log.addHandler(handler)
+    log.propagate = False
+
+    log.info(f"Device: {DEVICE}  Fold: {fold}")
 
     # ── 1. 加载 BERT（冻结） ──
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -100,12 +122,17 @@ if __name__ == "__main__":
         p.requires_grad = False
 
     # ── 2. 提取 embedding ──
-    print("提取 train embeddings...")
-    train_X, train_y = extract_embeddings(load_split("train"), tokenizer, bert)
-    print("提取 dev embeddings...")
-    dev_X, dev_y = extract_embeddings(load_split("dev"), tokenizer, bert)
-    print("提取 test embeddings...")
-    test_X, test_y = extract_embeddings(load_split("test"), tokenizer, bert)
+    if fold is not None:
+        train_samples, dev_samples, test_samples = load_kfold(fold)
+    else:
+        train_samples, dev_samples, test_samples = load_split("train"), load_split("dev"), load_split("test")
+
+    log.info("提取 train embeddings...")
+    train_X, train_y = extract_embeddings(train_samples, tokenizer, bert)
+    log.info("提取 dev embeddings...")
+    dev_X, dev_y = extract_embeddings(dev_samples, tokenizer, bert)
+    log.info("提取 test embeddings...")
+    test_X, test_y = extract_embeddings(test_samples, tokenizer, bert)
 
     # 释放 BERT 显存
     del bert
@@ -124,16 +151,19 @@ if __name__ == "__main__":
     n_pos, n_neg = train_y.sum().item(), (train_y == 0).sum().item()
     weight = torch.FloatTensor([1.0, n_neg / max(n_pos, 1)]).to(DEVICE)
     criterion = nn.CrossEntropyLoss(weight=weight)
+    log.info(f"数据: train={len(train_X)}, dev={len(dev_X)}, test={len(test_X)}")
+    log.info(f"类别权重: neg={weight[0]:.4f}, pos={weight[1]:.4f}")
 
-    print(f"\nMLP 参数量: {sum(p.numel() for p in model.parameters()):,}")
-    print(f"训练 MLP (input_dim={hidden_size}, epochs={EPOCHS}, lr={LR})\n")
+    log.info(f"超参数: model={MODEL_NAME}, epochs={EPOCHS}, lr={LR}, batch={BATCH_SIZE}, patience={PATIENCE}")
+    log.info(f"MLP 参数量: {sum(p.numel() for p in model.parameters()):,}  input_dim={hidden_size}")
 
     best_f1 = 0
     no_improve = 0
     for epoch in range(EPOCHS):
         model.train()
         total_loss = 0
-        for X_batch, y_batch in tqdm(train_dl, desc=f"Epoch {epoch+1}/{EPOCHS}", leave=False):
+        for X_batch, y_batch in tqdm(train_dl, desc=f"Epoch {epoch+1}/{EPOCHS}",
+                                         leave=False, file=sys.stderr):
             X_batch, y_batch = X_batch.to(DEVICE), y_batch.to(DEVICE)
             logits = model(X_batch)
             loss = criterion(logits, y_batch)
@@ -150,26 +180,30 @@ if __name__ == "__main__":
                 preds.extend(model(X_batch.to(DEVICE)).argmax(1).cpu().tolist())
                 labels.extend(y_batch.tolist())
         f1 = sklearn_f1(labels, preds, average="macro")
-        print(f"  Epoch {epoch+1}/{EPOCHS}  loss={total_loss/len(train_dl):.4f}  dev macro-F1={f1:.4f}")
+        log.info(f"Epoch {epoch+1}/{EPOCHS}  train_loss={total_loss/len(train_dl):.4f}  dev_macro-F1={f1:.4f}")
 
         if f1 > best_f1:
             best_f1 = f1
             no_improve = 0
-            torch.save(model.state_dict(), MODEL_DIR / "bert_frozen_mlp.pt")
+            suffix = f"_fold{fold}" if fold is not None else ""
+            torch.save(model.state_dict(), MODEL_DIR / f"bert_frozen_mlp{suffix}.pt")
         else:
             no_improve += 1
             if no_improve >= PATIENCE:
-                print(f"  Early stopping at epoch {epoch+1}")
+                log.info(f"Early stopping at epoch {epoch+1}")
                 break
 
-    print(f"\n最优 dev macro-F1: {best_f1:.4f}")
+    log.info(f"最优 dev macro-F1: {best_f1:.4f}")
 
     # ── 4. Test 评估 ──
-    model.load_state_dict(torch.load(MODEL_DIR / "bert_frozen_mlp.pt", map_location=DEVICE))
+    suffix = f"_fold{fold}" if fold is not None else ""
+    model.load_state_dict(torch.load(MODEL_DIR / f"bert_frozen_mlp{suffix}.pt", map_location=DEVICE))
     model.eval()
     preds, labels = [], []
     with torch.no_grad():
         for X_batch, y_batch in test_dl:
             preds.extend(model(X_batch.to(DEVICE)).argmax(1).cpu().tolist())
             labels.extend(y_batch.tolist())
-    evaluate(labels, preds, "BERT-Frozen + MLP")
+    evaluate(labels, preds, f"BERT-Frozen + MLP (fold={fold})")
+    if fold is not None:
+        save_predictions("bert_frozen", fold, labels, preds)

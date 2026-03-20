@@ -10,7 +10,7 @@ from pathlib import Path
 from torch.utils.data import Dataset, DataLoader
 from sklearn.metrics import f1_score as sklearn_f1
 from tqdm import tqdm
-from utils import load_split, MODEL_DIR
+from utils import load_split, MODEL_DIR, set_seed, save_predictions, load_kfold
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -105,17 +105,40 @@ class BiLSTMClassifier(nn.Module):
 
 
 if __name__ == "__main__":
-    print(f"Device: {DEVICE}")
-    print(f"超参数: hidden={HIDDEN_SIZE}, dropout={DROPOUT}, fc={FC_DIM}, "
-          f"lr={LR}, epochs={EPOCHS}, batch={BATCH_SIZE}")
+    import sys, logging, os, argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--fold", type=int, default=None)
+    args = parser.parse_args()
+    fold = args.fold
+    set_seed(42)
+
+    logging.basicConfig(level=logging.WARNING)
+
+    log = logging.getLogger("bilstm_train")
+    log.setLevel(logging.INFO)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(logging.Formatter("%(message)s"))
+    log.addHandler(handler)
+    log.propagate = False
+
+    log.info(f"Device: {DEVICE}  Fold: {fold}")
+    log.info(f"超参数: hidden={HIDDEN_SIZE}, dropout={DROPOUT}, fc={FC_DIM}, "
+             f"lr={LR}, epochs={EPOCHS}, batch={BATCH_SIZE}")
 
     word2idx, emb_matrix = load_glove()
-    train_ds = WICDataset(load_split("train"), word2idx)
-    dev_ds = WICDataset(load_split("dev"), word2idx)
-    test_ds = WICDataset(load_split("test"), word2idx)
+    if fold is not None:
+        train_samples, dev_samples, test_samples = load_kfold(fold)
+    else:
+        train_samples, dev_samples, test_samples = load_split("train"), load_split("dev"), load_split("test")
+    train_ds = WICDataset(train_samples, word2idx)
+    dev_ds = WICDataset(dev_samples, word2idx)
+    test_ds = WICDataset(test_samples, word2idx)
     train_dl = DataLoader(train_ds, BATCH_SIZE, shuffle=True, collate_fn=collate_fn)
     dev_dl = DataLoader(dev_ds, BATCH_SIZE, collate_fn=collate_fn)
     test_dl = DataLoader(test_ds, BATCH_SIZE, collate_fn=collate_fn)
+
+    log.info(f"数据: train={len(train_ds)}, dev={len(dev_ds)}, test={len(test_ds)}")
 
     model = BiLSTMClassifier(emb_matrix).to(DEVICE)
     optimizer = torch.optim.Adam(model.parameters(), lr=LR)
@@ -125,6 +148,7 @@ if __name__ == "__main__":
     n_pos, n_neg = sum(labels_all), len(labels_all) - sum(labels_all)
     weight = torch.FloatTensor([1.0, n_neg / max(n_pos, 1)]).to(DEVICE)
     criterion = nn.CrossEntropyLoss(weight=weight)
+    log.info(f"类别权重: neg={weight[0]:.4f}, pos={weight[1]:.4f}")
 
     def predict_dl(dl):
         model.eval()
@@ -142,7 +166,8 @@ if __name__ == "__main__":
     for epoch in range(EPOCHS):
         model.train()
         total_loss = 0
-        for ids1, ids2, idx1, idx2, labels in tqdm(train_dl, desc=f"Epoch {epoch+1}/{EPOCHS}", leave=False):
+        for ids1, ids2, idx1, idx2, labels in tqdm(train_dl, desc=f"Epoch {epoch+1}/{EPOCHS}",
+                                                         leave=False, file=sys.stderr):
             ids1, ids2, idx1, idx2, labels = [x.to(DEVICE) for x in [ids1, ids2, idx1, idx2, labels]]
             logits = model(ids1, ids2, idx1, idx2)
             loss = criterion(logits, labels)
@@ -153,22 +178,26 @@ if __name__ == "__main__":
 
         y_true, y_pred = predict_dl(dev_dl)
         f1 = sklearn_f1(y_true, y_pred, average="macro")
-        print(f"  Epoch {epoch+1}/{EPOCHS}  loss={total_loss/len(train_dl):.4f}  dev macro-F1={f1:.4f}")
+        log.info(f"Epoch {epoch+1}/{EPOCHS}  train_loss={total_loss/len(train_dl):.4f}  dev_macro-F1={f1:.4f}")
 
         if f1 > best_f1:
             best_f1 = f1
             no_improve = 0
-            torch.save(model.state_dict(), MODEL_DIR / "bilstm.pt")
+            suffix = f"_fold{fold}" if fold is not None else ""
+            torch.save(model.state_dict(), MODEL_DIR / f"bilstm{suffix}.pt")
         else:
             no_improve += 1
             if no_improve >= PATIENCE:
-                print(f"  Early stopping at epoch {epoch+1}")
+                log.info(f"Early stopping at epoch {epoch+1}")
                 break
 
-    print(f"\n最优 dev macro-F1: {best_f1:.4f}")
+    log.info(f"最优 dev macro-F1: {best_f1:.4f}")
 
     # 加载最优模型评估 test
-    model.load_state_dict(torch.load(MODEL_DIR / "bilstm.pt", map_location=DEVICE))
+    suffix = f"_fold{fold}" if fold is not None else ""
+    model.load_state_dict(torch.load(MODEL_DIR / f"bilstm{suffix}.pt", map_location=DEVICE))
     y_true, y_pred = predict_dl(test_dl)
     from utils import evaluate
-    evaluate(y_true, y_pred, "BiLSTM")
+    evaluate(y_true, y_pred, f"BiLSTM (fold={fold})")
+    if fold is not None:
+        save_predictions("bilstm", fold, y_true, y_pred)

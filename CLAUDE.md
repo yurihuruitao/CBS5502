@@ -23,12 +23,19 @@ python model_bilstm.py
 python model_bert.py
 python model_bert_frozen.py
 python model_roberta.py
+python model_deberta.py
 python model_sbert.py
+
+# Train with k-fold (from project root)
+bash run_kfold.sh                 # All models × 5 folds
+bash run_kfold.sh bert            # Single model × 5 folds
+python model_bert.py --fold 0     # Single model × single fold
 
 # Evaluation
 python evaluate.py                # Unified evaluation of all models + linguistic/error analysis
 python eval_official_wic.py       # Official WiC benchmark evaluation
 python analyze_bert_embeddings.py # BERT embedding analysis + visualization plots
+python statistical_tests.py       # Bootstrap CI + McNemar tests on k-fold predictions
 ```
 
 No `requirements.txt` exists. Key dependencies: PyTorch 2.0+ (CUDA), transformers, scikit-learn, matplotlib, scipy, nltk, sentence-transformers, tqdm.

@@ -9,7 +9,7 @@ import torch.nn as nn
 from transformers import AutoTokenizer, AutoModel
 from sklearn.metrics import f1_score as sklearn_f1
 from tqdm import tqdm
-from utils import load_split, evaluate, MODEL_DIR
+from utils import load_split, evaluate, MODEL_DIR, set_seed, save_predictions, load_kfold
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -26,7 +26,9 @@ THRESHOLD_RANGE = (0.5, 1.0, 0.01)  # (start, stop, step) 阈值搜索范围
 def encode_pairs(model, tokenizer, samples):
     """编码句子对，返回余弦相似度列表。"""
     all_sims = []
-    for i in tqdm(range(0, len(samples), BATCH_SIZE), desc="Encoding"):
+    import sys as _sys
+    for i in tqdm(range(0, len(samples), BATCH_SIZE), desc="Encoding",
+                  file=_sys.stderr):
         batch = samples[i:i+BATCH_SIZE]
         enc1 = tokenizer([s["sentence1"] for s in batch], truncation=True,
                          max_length=MAX_LEN, padding=True, return_tensors="pt").to(DEVICE)
@@ -41,15 +43,40 @@ def encode_pairs(model, tokenizer, samples):
 
 
 if __name__ == "__main__":
-    print(f"Device: {DEVICE}")
-    print(f"超参数: model={MODEL_NAME}, threshold_range={THRESHOLD_RANGE}")
+    import sys, logging, os, argparse
+    os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--fold", type=int, default=None)
+    args = parser.parse_args()
+    fold = args.fold
+    set_seed(42)
+
+    logging.basicConfig(level=logging.WARNING)
+    for noisy in ("httpx", "urllib3", "transformers", "huggingface_hub", "filelock"):
+        logging.getLogger(noisy).setLevel(logging.ERROR)
+
+    log = logging.getLogger("sbert_train")
+    log.setLevel(logging.INFO)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(logging.Formatter("%(message)s"))
+    log.addHandler(handler)
+    log.propagate = False
+
+    log.info(f"Device: {DEVICE}  Fold: {fold}")
+    log.info(f"超参数: model={MODEL_NAME}, threshold_range={THRESHOLD_RANGE}")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     model = AutoModel.from_pretrained(MODEL_NAME).to(DEVICE)
     model.eval()
 
+    if fold is not None:
+        _, dev_data, test_data = load_kfold(fold)
+    else:
+        dev_data = load_split("dev")
+        test_data = load_split("test")
+
     # 在 dev 上搜索最优阈值
-    dev_data = load_split("dev")
     dev_sims = encode_pairs(model, tokenizer, dev_data)
     dev_labels = [int(s["label"]) for s in dev_data]
 
@@ -62,15 +89,17 @@ if __name__ == "__main__":
             best_f1 = f1
             best_thr = thr
 
-    print(f"  最优阈值: {best_thr:.2f}  dev macro-F1: {best_f1:.4f}")
+    log.info(f"最优阈值: {best_thr:.2f}  dev_macro-F1: {best_f1:.4f}")
 
     # 保存配置
-    with open(MODEL_DIR / "sbert_threshold.json", "w") as f:
+    suffix = f"_fold{fold}" if fold is not None else ""
+    with open(MODEL_DIR / f"sbert_threshold{suffix}.json", "w") as f:
         json.dump({"threshold": float(best_thr), "model_name": MODEL_NAME}, f)
 
     # 评估 test
-    test_data = load_split("test")
     test_sims = encode_pairs(model, tokenizer, test_data)
     test_labels = [int(s["label"]) for s in test_data]
     test_preds = [1 if s >= best_thr else 0 for s in test_sims]
-    evaluate(test_labels, test_preds, "SentenceBERT")
+    evaluate(test_labels, test_preds, f"SentenceBERT (fold={fold})")
+    if fold is not None:
+        save_predictions("sbert", fold, test_labels, test_preds)

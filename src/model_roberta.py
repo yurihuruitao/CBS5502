@@ -8,7 +8,7 @@ from torch.utils.data import Dataset, DataLoader
 from sklearn.metrics import f1_score as sklearn_f1
 from transformers import AutoTokenizer, AutoModel, get_linear_schedule_with_warmup
 from tqdm import tqdm
-from utils import load_split, evaluate, MODEL_DIR
+from utils import load_split, evaluate, MODEL_DIR, set_seed, save_predictions, load_kfold
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -114,18 +114,45 @@ def predict_dl(model, dl):
 
 
 if __name__ == "__main__":
-    print(f"Device: {DEVICE}")
-    print(f"超参数: model={MODEL_NAME}, lr={LR}, epochs={EPOCHS}, "
-          f"batch={BATCH_SIZE}, freeze={FREEZE_LAYERS}, patience={PATIENCE}")
+    import sys, logging, math, os, argparse
+    os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--fold", type=int, default=None)
+    args = parser.parse_args()
+    fold = args.fold
+    set_seed(42)
+
+    logging.basicConfig(level=logging.WARNING)
+    for noisy in ("httpx", "urllib3", "transformers", "huggingface_hub", "filelock"):
+        logging.getLogger(noisy).setLevel(logging.ERROR)
+
+    log = logging.getLogger("roberta_train")
+    log.setLevel(logging.INFO)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(logging.Formatter("%(message)s"))
+    log.addHandler(handler)
+    log.propagate = False
+
+    log.info(f"Device: {DEVICE}  Fold: {fold}")
+    log.info(f"超参数: model={MODEL_NAME}, lr={LR}, epochs={EPOCHS}, "
+             f"batch={BATCH_SIZE}, freeze={FREEZE_LAYERS}, patience={PATIENCE}, "
+             f"warmup={WARMUP_RATIO}, weight_decay={WEIGHT_DECAY}")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-    train_ds = WICDataset(load_split("train"), tokenizer)
-    dev_ds = WICDataset(load_split("dev"), tokenizer)
-    test_ds = WICDataset(load_split("test"), tokenizer)
+    if fold is not None:
+        train_samples, dev_samples, test_samples = load_kfold(fold)
+    else:
+        train_samples, dev_samples, test_samples = load_split("train"), load_split("dev"), load_split("test")
+    train_ds = WICDataset(train_samples, tokenizer)
+    dev_ds = WICDataset(dev_samples, tokenizer)
+    test_ds = WICDataset(test_samples, tokenizer)
     dl_kwargs = dict(num_workers=NUM_WORKERS, pin_memory=True, persistent_workers=True)
     train_dl = DataLoader(train_ds, BATCH_SIZE, shuffle=True, **dl_kwargs)
     dev_dl = DataLoader(dev_ds, BATCH_SIZE, **dl_kwargs)
     test_dl = DataLoader(test_ds, BATCH_SIZE, **dl_kwargs)
+
+    log.info(f"数据: train={len(train_ds)}, dev={len(dev_ds)}, test={len(test_ds)}")
 
     model = RoBERTaWICClassifier().to(DEVICE)
     optimizer = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=WEIGHT_DECAY)
@@ -138,6 +165,7 @@ if __name__ == "__main__":
     n_pos, n_neg = sum(labels_all), len(labels_all) - sum(labels_all)
     weight = torch.FloatTensor([1.0, n_neg / max(n_pos, 1)]).to(DEVICE)
     criterion = nn.CrossEntropyLoss(weight=weight)
+    log.info(f"类别权重: neg={weight[0]:.4f}, pos={weight[1]:.4f}")
 
     scaler = torch.amp.GradScaler("cuda", enabled=USE_AMP)
 
@@ -146,7 +174,8 @@ if __name__ == "__main__":
     for epoch in range(EPOCHS):
         model.train()
         total_loss = 0
-        for batch in tqdm(train_dl, desc=f"Epoch {epoch+1}/{EPOCHS}", leave=False):
+        for batch in tqdm(train_dl, desc=f"Epoch {epoch+1}/{EPOCHS}",
+                          leave=False, file=sys.stderr):
             input_ids = batch["input_ids"].to(DEVICE, non_blocking=True)
             attention_mask = batch["attention_mask"].to(DEVICE, non_blocking=True)
             target_pos1 = batch["target_pos1"].to(DEVICE, non_blocking=True)
@@ -170,21 +199,25 @@ if __name__ == "__main__":
         y_true, y_pred = predict_dl(model, dev_dl)
         f1 = sklearn_f1(y_true, y_pred, average="macro")
         lr_now = scheduler.get_last_lr()[0]
-        print(f"  Epoch {epoch+1}/{EPOCHS}  loss={total_loss/len(train_dl):.4f}  "
-              f"dev macro-F1={f1:.4f}  lr={lr_now:.2e}")
+        log.info(f"Epoch {epoch+1}/{EPOCHS}  train_loss={total_loss/len(train_dl):.4f}  "
+                 f"dev_macro-F1={f1:.4f}  lr={lr_now:.2e}")
 
         if f1 > best_f1:
             best_f1 = f1
             no_improve = 0
-            torch.save(model.state_dict(), MODEL_DIR / "roberta.pt")
+            suffix = f"_fold{fold}" if fold is not None else ""
+            torch.save(model.state_dict(), MODEL_DIR / f"roberta{suffix}.pt")
         else:
             no_improve += 1
             if no_improve >= PATIENCE:
-                print(f"  Early stopping at epoch {epoch+1}")
+                log.info(f"Early stopping at epoch {epoch+1}")
                 break
 
-    print(f"\n最优 dev macro-F1: {best_f1:.4f}")
+    log.info(f"最优 dev macro-F1: {best_f1:.4f}")
 
-    model.load_state_dict(torch.load(MODEL_DIR / "roberta.pt", map_location=DEVICE))
+    suffix = f"_fold{fold}" if fold is not None else ""
+    model.load_state_dict(torch.load(MODEL_DIR / f"roberta{suffix}.pt", map_location=DEVICE))
     y_true, y_pred = predict_dl(model, test_dl)
-    evaluate(y_true, y_pred, "RoBERTa")
+    evaluate(y_true, y_pred, f"RoBERTa (fold={fold})")
+    if fold is not None:
+        save_predictions("roberta", fold, y_true, y_pred)

@@ -1,0 +1,20 @@
+Device: cuda  Fold: 0
+超参数: model=roberta-base, lr=2e-05, epochs=8, batch=32, freeze=0, patience=3, warmup=0.1, weight_decay=0.01
+数据: train=31129, dev=8829, test=10811
+类别权重: neg=1.0000, pos=1.7230
+Epoch 1/8  train_loss=0.5909  dev_macro-F1=0.7019  lr=1.94e-05
+Epoch 2/8  train_loss=0.4790  dev_macro-F1=0.7151  lr=1.67e-05
+Epoch 3/8  train_loss=0.3729  dev_macro-F1=0.7080  lr=1.39e-05
+Epoch 4/8  train_loss=0.2660  dev_macro-F1=0.7042  lr=1.11e-05
+Epoch 5/8  train_loss=0.1820  dev_macro-F1=0.7218  lr=8.33e-06
+Epoch 6/8  train_loss=0.1242  dev_macro-F1=0.7119  lr=5.56e-06
+Epoch 7/8  train_loss=0.0862  dev_macro-F1=0.7140  lr=2.78e-06
+Epoch 8/8  train_loss=0.0665  dev_macro-F1=0.7145  lr=0.00e+00
+Early stopping at epoch 8
+最优 dev macro-F1: 0.7218
+
+[RoBERTa (fold=0)] 评估结果:
+  Accuracy:    0.7356
+  Precision:   0.7161
+  Recall:      0.7251
+  Macro-F1:    0.7193

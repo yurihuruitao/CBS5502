@@ -133,6 +133,32 @@ def predict_sbert(samples, batch_size=64):
     return preds
 
 
+def predict_deberta(samples, batch_size=32):
+    from model_deberta import DeBERTaWICClassifier, WICDataset, MODEL_NAME
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    ds = WICDataset(samples, tokenizer)
+    dl = torch.utils.data.DataLoader(ds, batch_size)
+
+    model = DeBERTaWICClassifier().to(DEVICE)
+    model.load_state_dict(torch.load(MODEL_DIR / "deberta.pt", map_location=DEVICE))
+    model.eval()
+
+    preds = []
+    with torch.no_grad():
+        for batch in dl:
+            input_ids = batch["input_ids"].to(DEVICE)
+            attention_mask = batch["attention_mask"].to(DEVICE)
+            target_mask1 = batch["target_mask1"].to(DEVICE)
+            target_mask2 = batch["target_mask2"].to(DEVICE)
+            token_type_ids = batch.get("token_type_ids")
+            if token_type_ids is not None:
+                token_type_ids = token_type_ids.to(DEVICE)
+            logits = model(input_ids, attention_mask, target_mask1, target_mask2,
+                           token_type_ids=token_type_ids)
+            preds.extend(logits.argmax(dim=1).cpu().tolist())
+    return preds
+
+
 def predict_bert_frozen(samples, batch_size=64):
     from model_bert_frozen import MLP, extract_embeddings
     from transformers import BertModel
@@ -178,6 +204,7 @@ def evaluate_all_models(test_data):
         "BERT-Frozen+MLP": lambda d: predict_bert_frozen(d),
         "BERT": lambda d: predict_bert(d),
         "RoBERTa": lambda d: predict_roberta(d),
+        "DeBERTa": lambda d: predict_deberta(d),
         "SentenceBERT": lambda d: predict_sbert(d),
     }
 

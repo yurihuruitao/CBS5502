@@ -36,21 +36,25 @@ CBS5502/
 │       ├── train.jsonl                # 训练集
 │       ├── dev.jsonl                  # 验证集
 │       └── test.jsonl                 # 测试集
+├── run_kfold.sh                       # 一键运行 5 折交叉验证
 ├── src/
-│   ├── utils.py                       # 共用工具（路径、数据加载、评估函数）
+│   ├── utils.py                       # 共用工具（路径、数据加载、评估、k-fold 划分）
 │   ├── data_clean.py                  # 数据清洗与划分
 │   ├── model_bilstm.py               # BiLSTM 模型
 │   ├── model_bert.py                  # BERT 微调模型
 │   ├── model_bert_frozen.py           # BERT 冻结 + MLP 模型
 │   ├── model_roberta.py               # RoBERTa 微调模型
+│   ├── model_deberta.py               # DeBERTa-v3-base 微调模型
 │   ├── model_sbert.py                 # Sentence-BERT 余弦相似度模型
 │   ├── evaluate.py                    # 统一评估 + 语言学分析 + 错误分析
+│   ├── statistical_tests.py           # Bootstrap CI + McNemar 统计检验
 │   └── analyze_bert_embeddings.py     # BERT 上下文向量分析与可视化
 ├── models/                            # 训练好的模型权重（Google Drive）
-│   ├── bert.pt
-│   ├── bert_frozen_mlp.pt
-│   ├── bilstm.pt
-│   ├── roberta.pt
+│   ├── bert.pt / bert_fold{0-4}.pt
+│   ├── bert_frozen_mlp.pt / ..._fold{0-4}.pt
+│   ├── bilstm.pt / ..._fold{0-4}.pt
+│   ├── roberta.pt / ..._fold{0-4}.pt
+│   ├── deberta.pt / ..._fold{0-4}.pt
 │   └── sbert_threshold.json
 ├── plots/                             # BERT 向量分析图表
 │   ├── README.md                      # 图表详细解读
@@ -60,10 +64,14 @@ CBS5502/
 │   ├── cosine_by_pos.png
 │   ├── activation_heatmap.png
 │   └── norm_distribution.png
+├── logs/                              # 训练日志
+│   └── kfold/                         # 5 折交叉验证日志
 ├── results/                           # 评估结果
 │   ├── metrics.json
 │   ├── linguistic_analysis.json
-│   └── error_analysis.json
+│   ├── error_analysis.json
+│   ├── statistical_tests.json         # 统计检验结果
+│   └── predictions/                   # 各模型各折的预测结果（用于统计检验）
 └── scripts/                           # 数据构建脚本
     ├── semcor_to_wic.py               # SemCor → WIC 转换
     └── data_prepare.py                # 数据准备
@@ -100,6 +108,7 @@ CBS5502/
 | 测试集 | 7,476 | 2,907 | 4,569 | 38.9% |
 
 - **划分策略：** 按 lemma 分组划分（70/15/15），同一 lemma 的所有样本只出现在一个集合中，防止数据泄露
+- **5 折交叉验证：** 全部数据按 lemma 均匀分为 5 组，轮流用 1 组做测试、1 组做验证、3 组做训练，5 折测试集互不重叠，覆盖全部样本。用于报告 mean±std 指标并进行统计显著性检验
 - **类别不平衡处理：** 训练时使用加权损失函数（`CrossEntropyLoss(weight=...)`），权重按正负例比例反比设定
 
 ---
@@ -146,7 +155,15 @@ CBS5502/
 
 **关键超参数：** model=roberta-base, MAX_LEN=256, lr=2e-5, epochs=8, batch=32, warmup=10%, AMP(FP16), patience=3
 
-### 4.6 Sentence-BERT（`src/model_sbert.py`）
+### 4.6 DeBERTa-v3-base Fine-tune（`src/model_deberta.py`）
+
+- **输入：** 两句拼接经 DeBERTa-v3-base 编码（disentangled attention 机制）
+- **分类：** 提取五路特征拼接 `[CLS; t1; t2; t1-t2; t1*t2]`（3840 维），经两层 MLP 分类。目标词使用 subword 平均池化（而非仅取第一个 subword）
+- **特点：** DeBERTa-v3 的解耦注意力分别建模内容和位置信息，理论上更适合需要精确位置信息的 WIC 任务；使用 BF16 混合精度（DeBERTa-v3 不兼容 FP16）
+
+**关键超参数：** model=microsoft/deberta-v3-base, MAX_LEN=256, lr=2e-5, epochs=10, batch=32, warmup=10%, BF16, patience=5
+
+### 4.7 Sentence-BERT（`src/model_sbert.py`）
 
 - **输入：** 两句分别独立编码（不拼接），取 mean pooling 的句向量
 - **分类：** 计算两句向量的余弦相似度，在验证集上搜索最优阈值进行分类
@@ -185,7 +202,8 @@ models/
 ├── bert.pt
 ├── bert_frozen_mlp.pt
 ├── bilstm.pt
-└── roberta.pt
+├── roberta.pt
+└── deberta.pt
 
 data/
 ├── glove.6B.100d.txt
@@ -214,30 +232,54 @@ cd src/
 # 1. 数据清洗与划分（生成 data/split/）
 python data_clean.py
 
-# 2. 训练模型（需要 GPU）
+# 2a. 训练单个模型（使用默认 train/dev/test 划分）
 python model_bilstm.py
 python model_bert.py
 python model_bert_frozen.py
 python model_roberta.py
+python model_deberta.py
 python model_sbert.py
 
-# 3. 统一评估所有模型
+# 2b. 5 折交叉验证（推荐，从项目根目录运行）
+cd ..
+bash run_kfold.sh              # 全部模型 × 5 折
+bash run_kfold.sh bert         # 单个模型 × 5 折
+
+# 3. 统计检验（需要先完成 5 折训练）
+cd src/
+python statistical_tests.py    # Bootstrap CI + McNemar 配对检验
+
+# 4. 统一评估所有模型
 python evaluate.py
 
-# 4. BERT 上下文向量分析
+# 5. BERT 上下文向量分析
 python analyze_bert_embeddings.py
 
-# 5. 官方 WiC 基准测试
+# 6. 官方 WiC 基准测试
 python eval_official_wic.py
 ```
 
-> **注意：** 如果只想运行评估（跳过训练），只需下载模型权重，然后直接执行步骤 3-5。
+> **注意：** 如果只想运行评估（跳过训练），只需下载模型权重，然后直接执行步骤 4-6。5 折交叉验证需要重新训练所有模型。
 
 ---
 
-## 6. 参考文献
+## 6. 统计验证
+
+为确保实验结论的统计可靠性，本项目采用以下方法：
+
+- **5 折交叉验证：** 按 lemma 分组将全部数据均匀分为 5 折，每折轮流作为测试集（互不重叠），报告 5 折 Macro-F1 的 mean ± std
+- **Bootstrap 95% 置信区间：** 合并 5 折预测结果，进行 1000 次有放回抽样计算 Macro-F1 的 95% CI
+- **McNemar 配对检验：** 对所有模型两两比较，基于逐样本对错构建 2×2 列联表，使用 Edwards 连续性校正的 McNemar 检验判断模型差异是否统计显著（p < 0.05）
+
+统计检验脚本：`src/statistical_tests.py`，结果输出至 `results/statistical_tests.json`。
+
+---
+
+## 7. 参考文献
 
 - Pilehvar, M.T. & Camacho-Collados, J. (2019). *WiC: The Word-in-Context Dataset for Evaluating Context-Sensitive Meaning Representations.* NAACL-HLT.
 - Devlin, J. et al. (2019). *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.* NAACL-HLT.
 - Liu, Y. et al. (2019). *RoBERTa: A Robustly Optimized BERT Pretraining Approach.* arXiv.
+- He, P. et al. (2021). *DeBERTa: Decoding-enhanced BERT with Disentangled Attention.* ICLR.
+- He, P. et al. (2023). *DeBERTaV3: Improving DeBERTa using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing.* ICLR.
 - Miller, G.A. et al. (1993). *A Semantic Concordance.* HLT.

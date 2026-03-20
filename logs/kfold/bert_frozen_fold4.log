@@ -1,0 +1,20 @@
+Device: cuda  Fold: 4
+提取 train embeddings...
+提取 dev embeddings...
+提取 test embeddings...
+数据: train=28387, dev=10811, test=11571
+类别权重: neg=1.0000, pos=1.5161
+超参数: model=bert-base-uncased, epochs=8, lr=0.001, batch=32, patience=3
+MLP 参数量: 1,312,002  input_dim=2304
+Epoch 1/8  train_loss=0.5757  dev_macro-F1=0.7182
+Epoch 2/8  train_loss=0.5429  dev_macro-F1=0.7129
+Epoch 3/8  train_loss=0.5253  dev_macro-F1=0.7020
+Epoch 4/8  train_loss=0.5097  dev_macro-F1=0.7057
+Early stopping at epoch 4
+最优 dev macro-F1: 0.7182
+
+[BERT-Frozen + MLP (fold=4)] 评估结果:
+  Accuracy:    0.7736
+  Precision:   0.7455
+  Recall:      0.7328
+  Macro-F1:    0.7381

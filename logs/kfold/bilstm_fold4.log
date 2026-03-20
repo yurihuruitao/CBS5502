@@ -1,0 +1,17 @@
+Device: cuda  Fold: 4
+超参数: hidden=128, dropout=0.3, fc=64, lr=0.001, epochs=8, batch=32
+数据: train=28387, dev=10811, test=11571
+类别权重: neg=1.0000, pos=1.5161
+Epoch 1/8  train_loss=0.6189  dev_macro-F1=0.5662
+Epoch 2/8  train_loss=0.5590  dev_macro-F1=0.5736
+Epoch 3/8  train_loss=0.4628  dev_macro-F1=0.5165
+Epoch 4/8  train_loss=0.3228  dev_macro-F1=0.4925
+Epoch 5/8  train_loss=0.2048  dev_macro-F1=0.5104
+Early stopping at epoch 5
+最优 dev macro-F1: 0.5736
+
+[BiLSTM (fold=4)] 评估结果:
+  Accuracy:    0.6121
+  Precision:   0.6228
+  Recall:      0.6380
+  Macro-F1:    0.6046
