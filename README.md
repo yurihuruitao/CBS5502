@@ -15,7 +15,8 @@
 
 ### 文档导航
 
-- [RESULTS.md](RESULTS.md) — 模型训练过程与分类结果对比
+- [METHODOLOGY.md](METHODOLOGY.md) — 实验方法论（数据构建、模型架构、训练策略、统计检验）
+- [RESULTS.md](RESULTS.md) — 模型训练过程与分类结果对比（含 5 折 CV、Bootstrap CI、McNemar 检验）
 - [ANALYSIS.md](ANALYSIS.md) — 语言学维度分析与 BERT 上下文向量分析
 
 ---
@@ -188,14 +189,38 @@ pip install -r requirements.txt
 
 ### 5.2 下载大文件
 
-模型权重和语料库文件存储在 Google Drive，需手动下载或使用 gdown：
+模型权重和语料库文件存储在 Google Drive，需手动下载或使用命令行工具：
 
 | 文件 | 放置路径 | Google Drive |
 |------|---------|--------------|
-| 模型权重（`*.pt`） | `models/` | [下载](https://drive.google.com/open?id=1CkFDaNVM5LDHtWulIc588xBvtSTpjGjM) |
-| 语料库（GloVe + 原始数据集） | `data/` | [下载](https://drive.google.com/open?id=17Wzb4FGMvM5Gr9od9b0u7mJA0wjbY7wH) |
+| 全部（模型 + 数据） | 项目根目录 | [CBS5502](https://drive.google.com/drive/folders/1danZPf9iNPIqEljdN2JF2OkHDgRCDfVJ) |
+| 模型权重（`*.pt`） | `models/` | [models](https://drive.google.com/drive/folders/16R1C1-HmW63vti-AR6cS459uA0uLYWUd) |
+| 语料库（GloVe + 原始数据集） | `data/` | [data](https://drive.google.com/drive/folders/1otBOmMtl8iXd6-tpkdsPeftYs1bKRK8d) |
 
-下载后将文件放到对应位置：
+**方式一：rclone 一键同步（推荐）**
+
+```bash
+# 安装 rclone（如未安装）
+curl https://rclone.org/install.sh | sudo bash
+
+# 下载模型权重（~11 GB）和语料库数据（~400 MB）
+rclone copy --drive-shared-with-me --progress \
+  :drive,shared_with_me:CBS5502/models models/
+rclone copy --drive-shared-with-me --progress \
+  :drive,shared_with_me:CBS5502/data data/
+```
+
+> 如果你已配置 rclone gdrive remote，也可以用 `rclone copy gdrive:CBS5502/models models/` 等命令。
+
+**方式二：gdown**
+
+```bash
+pip install gdown
+gdown --folder "https://drive.google.com/drive/folders/16R1C1-HmW63vti-AR6cS459uA0uLYWUd" -O models/
+gdown --folder "https://drive.google.com/drive/folders/1otBOmMtl8iXd6-tpkdsPeftYs1bKRK8d" -O data/
+```
+
+下载后目录结构应为：
 
 ```
 models/
@@ -209,17 +234,6 @@ data/
 ├── glove.6B.100d.txt
 └── raw/
     └── wic_dataset.jsonl
-```
-
-或使用 gdown 批量下载：
-
-```bash
-# 下载模型权重
-gdown --folder "https://drive.google.com/open?id=1CkFDaNVM5LDHtWulIc588xBvtSTpjGjM" -O models/
-
-# 下载语料库
-gdown --folder "https://drive.google.com/open?id=17Wzb4FGMvM5Gr9od9b0u7mJA0wjbY7wH" -O data/raw/
-mv data/raw/glove.6B.100d.txt data/
 ```
 
 ### 5.3 运行
